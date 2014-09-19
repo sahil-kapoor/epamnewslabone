@@ -1,0 +1,119 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	width: 80%;
+	margin: 30px auto 0 auto;
+	height: 90%;
+}
+
+.page {
+	min-height: 85%;
+	height: auto !important;
+	height: 100%;
+}
+
+.wrap {
+	padding-bottom: 48px;
+	border: 1px solid gray;
+	margin: 5px 5px 5px 27%;
+	width: 72%;
+	min-height: 78%;
+	height: auto !important;
+	height: 80%;
+}
+
+header {
+	width: 100%;
+	display: block;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
+
+header #logo {
+	margin-top: 25px;
+	margin-left: 25px;
+	margin-bottom: 25px;
+	display: inline-block;
+}
+
+header #logo h1 {
+	font-size: 30px;
+	color: #495AB6;
+}
+
+header #language-select {
+	display: inline-block;
+	margin-left: 55%;
+	position: relative;
+	top: 20px;
+}
+
+#menu {
+	width: 25%;
+	margin-left: 10px;
+	float: left;
+}
+
+#menu #panel {
+	background-color: rgb(143, 143, 143);
+	padding: 15px 0 10px 10px;
+}
+
+#menu #panel #title {
+	margin-top: 8px;
+	background-color: #6B6B6B;
+	text-align: center;
+	color: white;
+	font-size: 18px;
+	padding: 3px;
+}
+
+#menu #panel #control {
+	margin-left: 30px;
+	background-color: white;
+	margin-top: 5px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	width: 85%;
+}
+
+#menu #panel #control ul {
+	margin-left: 30px;
+	margin-top: 6px;
+	margin-bottom: 20px;
+	width: 90%;
+	list-style:circle; 
+	list-style-type: circle;
+}
+
+#menu #panel #control ul li {
+	margin-left: 25px;
+	padding-left: 1em;
+	text-indent: -.7em;
+}
+
+#menu #panel #control li:before {
+	color: blue;
+	padding-right: 10px;
+}
+
+#navigable {
+	margin:10px 0 0 10px;	
+}
+
+footer {
+	width: 100%;
+	display: block;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	margin-top: -1px;
+}
+
+footer p {
+	text-align: center;
+}

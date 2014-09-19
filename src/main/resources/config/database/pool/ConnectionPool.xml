@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+<!-- 	<bean -->
+<!-- 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+<!-- 		<property name="location"> -->
+<!-- 			<value>WEB-INF/classes/config/database/properties/database.properties</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool"> -->
+<!-- 		<constructor-arg type="java.lang.String" value="${jdbc.driverClassName}" /> -->
+<!-- 		<constructor-arg type="java.lang.String" value="${jdbc.url}" /> -->
+<!-- 		<constructor-arg type="java.lang.String" value="${jdbc.username}" /> -->
+<!-- 		<constructor-arg type="java.lang.String" value="${jdbc.password}" /> -->
+<!-- 	</bean> -->
+
+	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool">
+		<constructor-arg type="java.lang.String" value="oracle.jdbc.OracleDriver" />
+		<constructor-arg type="java.lang.String" value="jdbc:oracle:thin:@localhost:1521/XE" />
+		<constructor-arg type="java.lang.String" value="demeshko" />
+		<constructor-arg type="java.lang.String" value="wdv11lol" />
+	</bean>
+
+</beans>

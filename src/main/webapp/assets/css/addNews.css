@@ -1,0 +1,29 @@
+#add-form{
+	margin: 10px 0 0 15px;'
+}
+
+
+#add-form table{
+	
+}
+
+#add-form th, td {
+    padding: 5px;
+    text-align: left;    
+}
+
+#add-form textarea{
+	 overflow: scroll; 
+	 resize: none;
+	 word-wrap: normal;
+ }
+ 
+#submit-cancel-buttons{
+ 	margin: 30px auto;
+ 	width: 185px;
+ }
+ 
+#submit-cancel-buttons input{
+ 	padding: 3px;
+ 	font-size: 15px;
+ }

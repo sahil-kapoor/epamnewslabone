@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="helloWorldForm"
+			type="by.epam.news.presentation.form.HelloWorldForm" />
+
+		<form-bean name="NewsForm" type="by.epam.news.presentation.form.NewsForm" />
+	</form-beans>
+
+	<global-forwards>
+		<forward name="News" path="/News.do" />
+<!-- 		<forward name="showNews" path="/showNews.do" /> -->
+<!-- 		<forward name="addNews" path="/addNews.do" /> -->
+<!-- 		<forward name="newsView" path="/newsView.do" /> -->
+	</global-forwards>
+
+	<action-mappings>
+
+		<action path="/News" type="by.epam.news.presentation.action.NewsAction"
+			parameter="method" name="NewsForm">
+			<forward name="edit" path="/view/news/showNews.jsp" />
+			<forward name="delete" path="/view/news/allNews.jsp" />
+		</action>
+		
+		<action path="/ListNews" type="by.epam.news.presentation.action.NewsAction"
+			parameter="method" name="NewsForm">
+			<forward name="list" path="/view/news/allNews.jsp" />
+		</action>
+		
+		<action path="/AddNews" type="by.epam.news.presentation.action.NewsAction"
+			parameter="method" name="NewsForm">
+			<forward name="add" path="/view/news/addNews.jsp" />
+		</action>
+		
+		<action path="/NewsView" type="by.epam.news.presentation.action.NewsAction"
+			parameter="method" name="NewsForm">
+			<forward name="view" path="/view/news/showNews.jsp" />
+		</action>
+		
+
+		<action path="/Locale"
+			type="by.epam.news.presentation.action.LanguageSelectAction" name="helloWorldForm"
+			parameter="method" validate="false">
+			<!-- <forward name=""success" path="/allNews"></forward> -->
+			<!-- <forward name="success" redirect="true"></forward> -->
+			<forward name="success" redirect="true" path="/allNews.do" />
+		</action>
+	</action-mappings>
+
+	<message-resources parameter="by.epam.news.properties.News" />
+
+
+
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+	</plug-in>
+
+
+<!-- 	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn"> -->
+<!-- 		<set-property property="contextConfigLocation" value="/WEB-INF/classes/SpringBeans.xml" /> -->
+<!-- 	</plug-in> -->
+
+</struts-config>
