@@ -5,7 +5,7 @@
 		<h1><bean:message key="title.news.header" /></h1>
 	</div>
 	<div id="language-select">
-		<html:link page="/Locale.do?method=russian">Russian</html:link>
-		<html:link page="/Locale.do?method=english">English</html:link>
+		<html:link page="/Locale.do?locale=ru">Russian</html:link>
+		<html:link page="/Locale.do?locale=en">English</html:link>
 	</div>
 </header>

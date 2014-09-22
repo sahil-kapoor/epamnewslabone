@@ -1,16 +1,20 @@
 package by.epam.news.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class News {
+
+public class News implements Serializable {
+	
+
+	private static final long serialVersionUID = 6566437990774525688L;
 	
 	private int id;
 	private String title;
-	private Date date;
+	private String date;
 	private String brief;
 	private String content;
 	
-	public News(int id, String title, Date date, String brief, String content) {
+	public News(int id, String title, String date, String brief, String content) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -35,11 +39,11 @@ public class News {
 		this.title = title;
 	}
 	
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 	
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

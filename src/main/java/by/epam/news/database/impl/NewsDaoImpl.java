@@ -26,16 +26,22 @@ public class NewsDaoImpl implements NewsDao {
 		Connection connection = null;
 		try {
 			connection = pool.getConnection();
+			String generatedColumns[] = { "ID" };
 			PreparedStatement statement = connection
-					.prepareStatement(SqlScriptMaker.getAdd());
+					.prepareStatement(SqlScriptMaker.getAdd(),  generatedColumns);
 			DaoHelp.setOneNews(statement, news);
 			statement.executeUpdate();
+			ResultSet keys = statement.getGeneratedKeys();  	
+			keys.next();  
+			int key = keys.getInt(1);
+			keys.close();  
 			DaoHelp.closeStatementAndConnection(statement, connection, pool);
+			return key; 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 1;
+		return -1;
 	}
 
 	@Override

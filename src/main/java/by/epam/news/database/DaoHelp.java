@@ -37,13 +37,14 @@ public class DaoHelp {
 		Date newsDate = result.getDate(3);
 		String brief = result.getString(4);
 		String content = result.getString(5);
-		return new News(id, title, newsDate, brief, content);
+		return new News(id, title, newsDate.toString(), brief, content);
 	}
 	
 	
 	public static void setOneNews(PreparedStatement statement, News news) throws SQLException {
+		java.sql.Date date = java.sql.Date.valueOf(news.getDate());
 		statement.setString(1, news.getTitle());
-		statement.setDate(2, new java.sql.Date(news.getDate().getTime()));
+		statement.setDate(2, date);
 		statement.setString(3, news.getBrief());
 		statement.setString(4, news.getContent());
 	}

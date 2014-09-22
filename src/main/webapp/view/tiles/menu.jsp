@@ -7,20 +7,13 @@
 			<bean:message key="title.news.menu" />
 		</div>
 		<div id="control">
-			<ul>
-				<html:submit property="method">
-					<bean:message key="news.list" />
-				</html:submit>
-				<html:submit property="method">
-					<bean:message key="news.add" />
-				</html:submit>
-				
-<%-- 				<li><html:link forward="allNews"> --%>
-<%-- 						<bean:message key="link.news.news_list" /> --%>
-<%-- 					</html:link></li> --%>
-<%-- 				<li><html:link forward="addNews"> --%>
-<%-- 						<bean:message key="link.news.add_news" /> --%>
-<%-- 					</html:link></li> --%>
+			<ul>				
+				<li><html:link forward="ListNews">
+						<bean:message key="link.news.news_list" />
+					</html:link></li>
+				<li><html:link forward="AddNews">
+						<bean:message key="link.news.add_news" />
+					</html:link></li>
 			</ul>
 		</div>
 	</div>

@@ -15,42 +15,44 @@
 
 	<global-forwards>
 		<forward name="News" path="/News.do" />
+		<forward name="ListNews" path="/ListNews.do" />
+		<forward name="ViewNews" path="/ViewNews.do" />
+		<forward name="AddNews" path="/AddNews.do" />
+		<forward name="CreateNews" path="/AddNews.do" />
 <!-- 		<forward name="showNews" path="/showNews.do" /> -->
 <!-- 		<forward name="addNews" path="/addNews.do" /> -->
 <!-- 		<forward name="newsView" path="/newsView.do" /> -->
 	</global-forwards>
 
 	<action-mappings>
-
-		<action path="/News" type="by.epam.news.presentation.action.NewsAction"
-			parameter="method" name="NewsForm">
-			<forward name="edit" path="/view/news/showNews.jsp" />
-			<forward name="delete" path="/view/news/allNews.jsp" />
-		</action>
 		
 		<action path="/ListNews" type="by.epam.news.presentation.action.NewsAction"
-			parameter="method" name="NewsForm">
+			parameter="list" scope="session"  name="NewsForm">			
 			<forward name="list" path="/view/news/allNews.jsp" />
 		</action>
 		
 		<action path="/AddNews" type="by.epam.news.presentation.action.NewsAction"
-			parameter="method" name="NewsForm">
+			parameter="add"   scope="session" name="NewsForm">
 			<forward name="add" path="/view/news/addNews.jsp" />
 		</action>
 		
 		<action path="/NewsView" type="by.epam.news.presentation.action.NewsAction"
-			parameter="method" name="NewsForm">
+			parameter="view" name="NewsForm">
 			<forward name="view" path="/view/news/showNews.jsp" />
 		</action>
 		
-
-		<action path="/Locale"
-			type="by.epam.news.presentation.action.LanguageSelectAction" name="helloWorldForm"
-			parameter="method" validate="false">
-			<!-- <forward name=""success" path="/allNews"></forward> -->
-			<!-- <forward name="success" redirect="true"></forward> -->
-			<forward name="success" redirect="true" path="/allNews.do" />
+		
+		<action path="/CreateNews" type="by.epam.news.presentation.action.NewsAction"
+			parameter="create" name="NewsForm" input="AddNews">
+			<forward name="view" path="/NewsView.do" redirect="true" />
 		</action>
+		
+		<action path="/Locale" type="by.epam.news.presentation.action.NewsAction"
+			parameter="locale" name="NewsForm" >
+			<forward name="list" path="/ListNews.do" redirect="true" />
+		</action>
+		
+		
 	</action-mappings>
 
 	<message-resources parameter="by.epam.news.properties.News" />
@@ -62,8 +64,8 @@
 	</plug-in>
 
 
-<!-- 	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn"> -->
-<!-- 		<set-property property="contextConfigLocation" value="/WEB-INF/classes/SpringBeans.xml" /> -->
-<!-- 	</plug-in> -->
+	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+		<set-property property="contextConfigLocation" value="/WEB-INF/classes/SpringBeans.xml" />
+	</plug-in>
 
 </struts-config>

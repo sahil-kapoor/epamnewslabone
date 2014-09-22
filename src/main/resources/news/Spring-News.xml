@@ -10,4 +10,5 @@
 
 	<bean id="springApplicationContext" class="by.epam.news.util.SpringApplicationContext" />
 
+	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl"/>	
 </beans>
