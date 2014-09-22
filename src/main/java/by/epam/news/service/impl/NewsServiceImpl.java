@@ -14,13 +14,19 @@ public class NewsServiceImpl implements NewsService{
 		NewsDao dao = (NewsDao) SpringApplicationContext.getBean("NewsDao");
 		int id = dao.addNews(news);
 		System.out.println("id="+id);
-		return 1;
+		return id;
 	}
 
 	@Override
 	public List<News> newsList() {
 		NewsDao dao = (NewsDao) SpringApplicationContext.getBean("NewsDao");		
 		return dao.loadAllNews();
+	}
+
+	@Override
+	public News loadNews(int id) {
+		NewsDao dao = (NewsDao) SpringApplicationContext.getBean("NewsDao");		
+		return dao.loadNews(id);
 	}
 
 }

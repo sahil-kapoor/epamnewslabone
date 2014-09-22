@@ -70,10 +70,12 @@ public class NewsDaoImpl implements NewsDao {
 			connection = pool.getConnection();
 			Statement statement = connection.createStatement();		
 			ResultSet result = statement.executeQuery(SqlScriptMaker.getLoadOne(id));
+			News news = null;
 			while (result.next()) {				
-				return DaoHelp.getOneNews(result);
+				news = DaoHelp.getOneNews(result);
 			}
 			DaoHelp.closeStatementAndConnection(statement, connection, pool);
+			return news;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

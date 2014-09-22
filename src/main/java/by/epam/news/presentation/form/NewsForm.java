@@ -1,6 +1,6 @@
 package by.epam.news.presentation.form;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -9,14 +9,14 @@ import by.epam.news.model.News;
 
 public class NewsForm extends ActionForm{
 	
-	
-	public NewsForm(){
-		newsMessage = new News(0, null, null, null, null);
-	}
-	
 	private News newsMessage;
 	private List<News> newsList;
 	
+	public NewsForm(){
+		newsMessage = new News(0, null, null, null, null);
+		newsList = new ArrayList<News>();
+	}
+
 	public News getNewsMessage() {
 		return newsMessage;
 	}
@@ -33,7 +33,4 @@ public class NewsForm extends ActionForm{
 		this.newsList = newsList;
 	}
 
-	
-	
-	
 }

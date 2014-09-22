@@ -2,7 +2,7 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
 <%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <div id="navigable">
-	<html:link forward="ListNews" >
+	<html:link forward="ListNews">
 		<bean:message key="title.news.menu"  />
 	</html:link>
 	>>

@@ -11,9 +11,29 @@
 </div>
 <h1>All news</h1>
 
-<c:forEach items="${NewsForm.newsList}" var="news">
-	<tr>
-		<td>${news.id}</td>
-		<td>${news.content}</td>
-	</tr>
-</c:forEach>
+<table>
+	<logic:iterate name="NewsForm" property="newsList" id="news">
+		<tr>
+			<td><bean:write name="news" property="id" /></td>
+			<td><bean:write name="news" property="title" /></td>
+			<td><bean:write name="news" property="date" /></td>
+			<td><bean:write name="news" property="brief" /></td>
+			<td><bean:write name="news" property="content" /></td>
+			<td><html:link forward="NewsView" paramId="id" paramName="news"
+					paramProperty="id">view</html:link></td>
+			<td><html:link forward="EditNews" paramId="id" paramName="news"
+					paramProperty="id">edit</html:link></td>
+
+			<%-- 			<html:link forward="NewsEdit">edit</html:link> --%>
+		</tr>
+		<tr>
+			<td><hr></td>
+			<td><hr></td>
+			<td><hr></td>
+			<td><hr></td>
+			<td><hr></td>
+			<td><hr></td>
+			<td><hr></td>
+		</tr>
+	</logic:iterate>
+</table>
