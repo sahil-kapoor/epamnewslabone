@@ -21,6 +21,7 @@
 		<forward name="EditNews" path="/EditNews.do" />
 		<forward name="CreateNews" path="/CreateNews.do" />
 		<forward name="UpdateNews" path="/UpdateNews.do" />
+		<forward name="DeleteNews" path="/DeleteNews.do" />
 		<!-- <forward name="showNews" path="/showNews.do" /> -->
 		<!-- <forward name="addNews" path="/addNews.do" /> -->
 		<!-- <forward name="newsView" path="/newsView.do" /> -->
@@ -52,6 +53,11 @@
 		<action path="/CreateNews" type="by.epam.news.presentation.action.NewsAction"
 			parameter="create" name="NewsForm" input="AddNews">
 			<forward name="view" path="/NewsView.do" redirect="true" />
+		</action>
+		
+		<action path="/DeleteNews" type="by.epam.news.presentation.action.NewsAction"
+			parameter="delete" name="NewsForm" input="NewsView">
+			<forward name="list" path="/NewsList.do" redirect="true" />
 		</action>
 
 		<action path="/Locale" type="by.epam.news.presentation.action.NewsAction"

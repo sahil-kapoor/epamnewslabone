@@ -7,7 +7,7 @@
 	
 }
 
-#add-form th, td {
+#add-form th, #add-form  td {
     padding: 5px;
     text-align: left;    
 }

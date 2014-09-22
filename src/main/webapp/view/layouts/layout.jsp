@@ -8,6 +8,7 @@
 	<title><bean:message key="title.news.menu" /></title>
 	<link rel="stylesheet" type="text/css" href="assets/css/layout.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/addNews.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/newsView.css">
 </head>
 <body>
 	<tiles:insert attribute="header"/>

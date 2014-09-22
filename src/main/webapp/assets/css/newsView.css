@@ -1,0 +1,52 @@
+#news-view-body {
+	margin-top: 20px;
+	margin-left: 40px;
+}
+
+#news-view-body table {
+	width: 95%;
+	border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+#news-view-body td {
+	table-layout: fixed;
+}
+
+#news-view-body .td-shadow {
+	color: gray;
+	padding-right: 30px;
+	width: 100px;
+}
+
+#news-view-body .td-body div {
+	width: 40%;
+	word-wrap: break-word;
+}
+
+#news-view-body tr {
+	line-height: 30px;
+}
+
+#news-view-body tr.space-under > td
+{
+  padding-bottom: 20px;
+}
+
+
+
+#news-view-control{
+	margin-top: 5px;
+ 	margin-right: 50px;
+ 	float: right;
+ }
+ 
+ #news-view-control form{
+ 	display: inline;
+ }
+ 
+#news-view-control input{
+ 	padding: 3px;
+ 	margin-right: 10px;
+ 	font-size: 15px;
+ }
