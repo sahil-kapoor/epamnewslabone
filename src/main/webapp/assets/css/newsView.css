@@ -20,7 +20,7 @@
 }
 
 #news-view-body .td-body div {
-	width: 40%;
+	width: 85%;
 	word-wrap: break-word;
 }
 
@@ -32,8 +32,6 @@
 {
   padding-bottom: 20px;
 }
-
-
 
 #news-view-control{
 	margin-top: 5px;

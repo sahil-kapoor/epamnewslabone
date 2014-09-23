@@ -18,13 +18,8 @@
 		<forward name="ListNews" path="/ListNews.do" />
 		<forward name="ViewNews" path="/ViewNews.do" />
 		<forward name="AddNews" path="/AddNews.do" />
-		<forward name="EditNews" path="/EditNews.do" />
 		<forward name="CreateNews" path="/CreateNews.do" />
-		<forward name="UpdateNews" path="/UpdateNews.do" />
 		<forward name="DeleteNews" path="/DeleteNews.do" />
-		<!-- <forward name="showNews" path="/showNews.do" /> -->
-		<!-- <forward name="addNews" path="/addNews.do" /> -->
-		<!-- <forward name="newsView" path="/newsView.do" /> -->
 	</global-forwards>
 
 	<action-mappings>
@@ -39,16 +34,10 @@
 			<forward name="add" path="/view/news/addNews.jsp" />
 		</action>
 		
-		<action path="/EditNews" type="by.epam.news.presentation.action.NewsAction"
-			parameter="edit" name="NewsForm">
-			<forward name="edit" path="/view/news/addNews.jsp" />
-		</action>
-
 		<action path="/NewsView" type="by.epam.news.presentation.action.NewsAction"
 			parameter="view" name="NewsForm">
 			<forward name="view" path="/view/news/showNews.jsp" />
 		</action>
-
 
 		<action path="/CreateNews" type="by.epam.news.presentation.action.NewsAction"
 			parameter="create" name="NewsForm" input="AddNews">

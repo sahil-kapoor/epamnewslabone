@@ -89,8 +89,9 @@ public class NewsDaoImpl implements NewsDao {
 		try {
 			connection = pool.getConnection();
 			PreparedStatement statement = connection
-					.prepareStatement(SqlScriptMaker.getUpdate());
+					.prepareStatement(SqlScriptMaker.getUpdate());		
 			DaoHelp.setOneNews(statement, news);
+			statement.setInt(5, news.getId());
 			statement.executeUpdate();
 			DaoHelp.closeStatementAndConnection(statement, connection, pool);
 		} catch (Exception e) {

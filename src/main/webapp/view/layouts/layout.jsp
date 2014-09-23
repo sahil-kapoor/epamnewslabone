@@ -9,13 +9,14 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/layout.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/addNews.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/newsView.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/newsList.css">
+	<script type="text/javascript" src="assets/js/main.js"></script>
 </head>
 <body>
 	<tiles:insert attribute="header"/>
-	<div class="page">
+	<div id="page">
 	  <tiles:insert attribute="menu"/> 
 	  <div class="wrap">
-	  	
 	 	 <tiles:insert attribute="body"/> 
 	  </div>
 	</div>	

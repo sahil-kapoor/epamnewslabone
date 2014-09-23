@@ -47,7 +47,8 @@
 
 <div id="news-view-control">
 
- 	<html:form action="EditNews">
+ 	<html:form action="AddNews">
+ 		<html:hidden name="NewsForm" property="newsMessage.id"/>
 		<html:submit>
 			<bean:message key="label.common.button.edit" />
 		</html:submit>

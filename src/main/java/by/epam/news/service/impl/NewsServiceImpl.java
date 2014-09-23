@@ -9,23 +9,33 @@ import by.epam.news.util.SpringApplicationContext;
 
 public class NewsServiceImpl implements NewsService{
 
+	private NewsDao dao;
+	
+	public void setDao(NewsDao dao){
+		this.dao = dao;
+	}
+	
 	@Override
 	public int saveNews(News news) {
-		NewsDao dao = (NewsDao) SpringApplicationContext.getBean("NewsDao");
-		int id = dao.addNews(news);
-		System.out.println("id="+id);
+				
+		int id = news.getId();
+		if (id == 0){
+			id = dao.addNews(news);
+		} else {
+			dao.editNews(news);
+		}
 		return id;
 	}
 
 	@Override
 	public List<News> newsList() {
-		NewsDao dao = (NewsDao) SpringApplicationContext.getBean("NewsDao");		
+			
 		return dao.loadAllNews();
 	}
 
 	@Override
 	public News loadNews(int id) {
-		NewsDao dao = (NewsDao) SpringApplicationContext.getBean("NewsDao");		
+			
 		return dao.loadNews(id);
 	}
 

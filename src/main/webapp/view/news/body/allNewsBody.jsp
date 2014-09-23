@@ -9,31 +9,31 @@
 	>>
 	<bean:message key="link.news.news_list" />
 </div>
-<h1>All news</h1>
 
-<table>
+<div id="news-list">
 	<logic:iterate name="NewsForm" property="newsList" id="news">
-		<tr>
-			<td><bean:write name="news" property="id" /></td>
-			<td><bean:write name="news" property="title" /></td>
-			<td><bean:write name="news" property="date" /></td>
-			<td><bean:write name="news" property="brief" /></td>
-			<td><bean:write name="news" property="content" /></td>
-			<td><html:link forward="NewsView" paramId="id" paramName="news"
-					paramProperty="id">view</html:link></td>
-			<td><html:link forward="EditNews" paramId="id" paramName="news"
-					paramProperty="id">edit</html:link></td>
+		<div class="news-list-single-news">
+			<div class="title-date">
+				<div class="title">
+					<b><bean:write name="news" property="title" /></b>
+				</div>
+				<div class="date">
+					<bean:write name="news" property="date" />
+				</div>
+			</div>
 
-			<%-- 			<html:link forward="NewsEdit">edit</html:link> --%>
-		</tr>
-		<tr>
-			<td><hr></td>
-			<td><hr></td>
-			<td><hr></td>
-			<td><hr></td>
-			<td><hr></td>
-			<td><hr></td>
-			<td><hr></td>
-		</tr>
+			<div class="news-content">
+				<bean:write name="news" property="content" />
+			</div>
+
+			<div class="nav-checkbox">
+				<html:link forward="NewsView" paramId="id" paramName="news"
+					paramProperty="id">view</html:link>
+				<html:link forward="AddNews" paramId="id" paramName="news"
+					paramProperty="id">edit</html:link>
+				<input type="checkbox">
+			</div>
+			
+		</div>
 	</logic:iterate>
-</table>
+</div>
