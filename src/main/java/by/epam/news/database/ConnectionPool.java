@@ -36,7 +36,6 @@ public class ConnectionPool {
     }
 
     public Connection getConnection() throws Exception{
-    	System.out.println("need connection");
         Connection connection;
         try {
             connection = freeConnection.take();
@@ -44,12 +43,10 @@ public class ConnectionPool {
         } catch (InterruptedException e) {
             throw new Exception("Cant take pool connection", e);
         }
-        System.out.println("have connection");
         return connection;
     }
 
     public void returnConnection(Connection connection) throws Exception{
-    	System.out.println("return connection");
         if (busyConnection.contains(connection)){
             try {
                 freeConnection.put(connection);

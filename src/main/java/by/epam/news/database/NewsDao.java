@@ -15,6 +15,6 @@ public interface NewsDao {
 	
 	void editNews(News news);
 	
-	void deleteNews(List<Integer> idList);
+	void deleteNews(int[] ids);
 	
 }

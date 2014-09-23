@@ -13,4 +13,6 @@ public interface NewsService {
 	
 	public News loadNews(int id);
 	
+	public void deleteNews(int[] ids);
+	
 }

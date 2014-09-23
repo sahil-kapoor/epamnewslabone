@@ -9,6 +9,7 @@
 	<bean:message key="link.news.show_news" />
 </div>
 
+
 <div id="news-view-body">
 	<table>
 		<tr>
@@ -53,11 +54,13 @@
 			<bean:message key="label.common.button.edit" />
 		</html:submit>
 	</html:form>
-	
+	<p>${newsMessage.id}xxx${NewsForm.newsMessage.id}xxx<bean:write name="NewsForm" property="newsMessage.id" /></p>
 	<html:form action="DeleteNews">
-		<html:cancel>
+	<html:hidden property="newsToDelete" value="${id}"></html:hidden>
+
+		<html:submit>
 			<bean:message key="label.common.button.delete" />
-		</html:cancel>
+		</html:submit>
 	</html:form>
 </div>
 

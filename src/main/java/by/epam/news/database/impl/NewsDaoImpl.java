@@ -101,12 +101,12 @@ public class NewsDaoImpl implements NewsDao {
 	}
 
 	@Override
-	public void deleteNews(List<Integer> idList) {
+	public void deleteNews(int[] ids) {
 		Connection connection = null;
 		try {
 			connection = pool.getConnection();
 			Statement statement = connection.createStatement();	
-			statement.execute(SqlScriptMaker.getDelete(idList));		
+			statement.execute(SqlScriptMaker.getDelete(ids));		
 			DaoHelp.closeStatementAndConnection(statement, connection, pool);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

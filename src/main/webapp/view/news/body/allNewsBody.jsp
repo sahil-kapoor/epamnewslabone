@@ -11,29 +11,31 @@
 </div>
 
 <div id="news-list">
-	<logic:iterate name="NewsForm" property="newsList" id="news">
-		<div class="news-list-single-news">
-			<div class="title-date">
-				<div class="title">
-					<b><bean:write name="news" property="title" /></b>
+	<html:form action="DeleteNews">
+		<logic:iterate name="NewsForm" property="newsList" id="news">
+			<div class="news-list-single-news">
+				<div class="title-date">
+					<div class="title">
+						<b><bean:write name="news" property="title" /></b>
+					</div>
+					<div class="date">
+						<bean:write name="news" property="date" />
+					</div>
 				</div>
-				<div class="date">
-					<bean:write name="news" property="date" />
+	
+				<div class="news-content">
+					<bean:write name="news" property="content" />
+				</div>
+	
+				<div class="nav-checkbox">
+					<html:link forward="NewsView" paramId="id" paramName="news"
+						paramProperty="id">view</html:link>
+					<html:link forward="AddNews" paramId="id" paramName="news"
+						paramProperty="id">edit</html:link>
+					<html:multibox property="newsToDelete" value="${news.id}"/>
 				</div>
 			</div>
-
-			<div class="news-content">
-				<bean:write name="news" property="content" />
-			</div>
-
-			<div class="nav-checkbox">
-				<html:link forward="NewsView" paramId="id" paramName="news"
-					paramProperty="id">view</html:link>
-				<html:link forward="AddNews" paramId="id" paramName="news"
-					paramProperty="id">edit</html:link>
-				<input type="checkbox">
-			</div>
-			
-		</div>
-	</logic:iterate>
+		</logic:iterate>
+		<html:submit>Delete</html:submit>
+	</html:form>
 </div>

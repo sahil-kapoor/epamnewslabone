@@ -5,7 +5,6 @@ import java.util.List;
 import by.epam.news.database.NewsDao;
 import by.epam.news.model.News;
 import by.epam.news.service.NewsService;
-import by.epam.news.util.SpringApplicationContext;
 
 public class NewsServiceImpl implements NewsService{
 
@@ -37,6 +36,11 @@ public class NewsServiceImpl implements NewsService{
 	public News loadNews(int id) {
 			
 		return dao.loadNews(id);
+	}
+
+	@Override
+	public void deleteNews(int[] ids) {
+		dao.deleteNews(ids);
 	}
 
 }

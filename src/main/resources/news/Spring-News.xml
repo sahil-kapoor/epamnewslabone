@@ -14,4 +14,8 @@
 		<property name="dao" ref="NewsDao" />
 	</bean>	
 	
+	<bean id="NewsAction" class="by.epam.news.presentation.action.NewsAction">
+		<property name="newsService" ref="NewsService" />
+	</bean>	
+	
 </beans>

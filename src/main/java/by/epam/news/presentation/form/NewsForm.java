@@ -7,10 +7,12 @@ import org.apache.struts.action.ActionForm;
 
 import by.epam.news.model.News;
 
+@SuppressWarnings("serial")
 public class NewsForm extends ActionForm{
 	
 	private News newsMessage;
 	private List<News> newsList;
+	private int[] newsToDelete;  
 	
 	public NewsForm(){
 		newsMessage = new News(0, null, null, null, null);
@@ -31,6 +33,14 @@ public class NewsForm extends ActionForm{
 	
 	public void setNewsList(List<News> newsList) {
 		this.newsList = newsList;
+	}
+
+	public int[] getNewsToDelete() {
+		return newsToDelete;
+	}
+
+	public void setNewsToDelete(int[] newsToDelete) {
+		this.newsToDelete = newsToDelete;
 	}
 
 }

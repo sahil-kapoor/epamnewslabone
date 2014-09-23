@@ -1,6 +1,5 @@
 package by.epam.news.database;
 
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -37,10 +36,10 @@ public class SqlScriptMaker {
 	}
 
 
-	public static String getDelete(List<Integer> idList) {
+	public static String getDelete(int[] ids) {
 		StringBuilder sql = new StringBuilder(bundle.getString(DELETE));
 		sql.append("(");
-		for(Integer id : idList){
+		for(int id : ids){
 			sql.append(id);
 			sql.append(",");
 		}

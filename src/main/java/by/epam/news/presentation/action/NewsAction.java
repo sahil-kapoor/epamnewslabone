@@ -20,6 +20,12 @@ import by.epam.news.util.SpringApplicationContext;
 public class NewsAction extends MappingDispatchAction {
 	
 	private final static String LAST_PAGE = "lastPage";
+	
+	private NewsService newsService = (NewsService) SpringApplicationContext.getBean("NewsService");
+	
+	public void setNewsService(NewsService service){
+		this.newsService = service;
+	}
 
 	public ActionForward add(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -27,8 +33,8 @@ public class NewsAction extends MappingDispatchAction {
 		System.out.println("add");
 		String newsId = request.getParameter("id");		
 		if( null != newsId){
-			NewsService service = (NewsService) SpringApplicationContext.getBean("NewsService");
-			News news = service.loadNews(Integer.parseInt(newsId));
+			
+			News news = newsService.loadNews(Integer.parseInt(newsId));
 			NewsForm newsForm = (NewsForm)form;
 			newsForm.setNewsMessage(news);
 		} 	
@@ -39,8 +45,7 @@ public class NewsAction extends MappingDispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		NewsForm news = (NewsForm)form;	
-		NewsService service = (NewsService) SpringApplicationContext.getBean("NewsService");
-		int id = service.saveNews(news.getNewsMessage());
+		int id = newsService.saveNews(news.getNewsMessage());
 		System.out.println("create");
 		ActionRedirect redirect = new ActionRedirect(mapping.findForward("view"));
 		redirect.addParameter("id", id);
@@ -51,9 +56,9 @@ public class NewsAction extends MappingDispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		request.getSession().setAttribute(LAST_PAGE, "view");
-		NewsService service = (NewsService) SpringApplicationContext.getBean("NewsService");
-		News news = service.loadNews(Integer.parseInt(request.getParameter("id")));
+		News news = newsService.loadNews(Integer.parseInt(request.getParameter("id")));
 		NewsForm newsForm = (NewsForm)form;
+		System.out.println(news);
 		newsForm.setNewsMessage(news);
 		System.out.println("view");
 		return mapping.findForward("view");
@@ -65,17 +70,20 @@ public class NewsAction extends MappingDispatchAction {
 		System.out.println("list");
 		request.getSession().setAttribute(LAST_PAGE, "list");
 		NewsForm news = (NewsForm)form;
-		NewsService service = (NewsService) SpringApplicationContext.getBean("NewsService");		
-		news.setNewsList(service.newsList());
+		news.setNewsList(newsService.newsList());
 		return mapping.findForward("list");
 	}
 
 	public ActionForward delete(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
 		System.out.println("delete");
-		return mapping.findForward("delete");
+		NewsForm newsForm = (NewsForm)form;
+		for(int i : newsForm.getNewsToDelete()){
+			System.out.println(i);
+		}
+		newsService.deleteNews(newsForm.getNewsToDelete());
+		return mapping.findForward("list");
 	}
 
 	
