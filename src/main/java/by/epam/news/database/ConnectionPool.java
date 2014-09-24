@@ -19,6 +19,7 @@ public class ConnectionPool {
 
 
     public ConnectionPool(String driver, String url, String user, String password) throws Exception{
+    	System.out.println("pool create");
         freeConnection = new LinkedBlockingQueue<>(MAX_CONNECTION_COUNT);
         busyConnection = new ArrayBlockingQueue<>(MAX_CONNECTION_COUNT);
         try {
@@ -61,6 +62,7 @@ public class ConnectionPool {
 
 
     public void destroy() throws SQLException{
+    	System.out.println("pool destroy");
             for(Connection connection : freeConnection){
                 connection.close();
             }

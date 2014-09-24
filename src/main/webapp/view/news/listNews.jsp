@@ -19,23 +19,24 @@
 						<b><bean:write name="news" property="title" /></b>
 					</div>
 					<div class="date">
-						<bean:write name="news" property="date" />
+						<bean:write name="news" property="dateString" />
 					</div>
 				</div>
 	
 				<div class="news-content">
-					<bean:write name="news" property="content" />
+					<bean:write name="news" property="brief" />
 				</div>
 	
 				<div class="nav-checkbox">
 					<html:link forward="NewsView" paramId="id" paramName="news"
 						paramProperty="id">view</html:link>
-					<html:link forward="AddNews" paramId="id" paramName="news"
-						paramProperty="id">edit</html:link>
+					<html:link action="AddNews.do?id=${news.id}&last=list">edit</html:link>
 					<html:multibox property="newsToDelete" value="${news.id}"/>
 				</div>
 			</div>
 		</logic:iterate>
-		<html:submit>Delete</html:submit>
+		<div id="delete-all-button">
+			<html:submit>Delete</html:submit>
+		</div>
 	</html:form>
 </div>

@@ -4,23 +4,22 @@
        "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
 <tiles-definitions>     
   
-	<definition name="layout" path="/view/layouts/layout.jsp">
+	<definition name="layout" path="/view/layouts/base.jsp">
 		<put name="header" value="/view/tiles/header.jsp" />
 		<put name="menu" value="/view/tiles/menu.jsp" />
 		<put name="footer" value="/view/tiles/footer.jsp" />
-		<put name="body" value="/view/tiles/body.jsp" />
 	</definition>
 	
-	<definition name="allNews" extends="layout">
-		<put name="body" value="/view/news/body/allNewsBody.jsp" />
+	<definition name="allNewsPage" extends="layout">
+		<put name="body" value="/view/news/listNews.jsp" />
 	</definition>
 	
-	<definition name="showNews" extends="layout">
-		<put name="body" value="/view/news/body/showNewsBody.jsp" />
+	<definition name="showNewsPage" extends="layout">
+		<put name="body" value="/view/news//newsView.jsp" />
 	</definition>
 	
-	<definition name="addNews" extends="layout">
-		<put name="body" value="/view/news/body/addNewsBody.jsp" />
+	<definition name="addNewsPage" extends="layout">
+		<put name="body" value="/view/news/addNews.jsp" />
 	</definition>
 	
 </tiles-definitions>

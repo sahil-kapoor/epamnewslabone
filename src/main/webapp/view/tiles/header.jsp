@@ -5,7 +5,7 @@
 		<h1>News management</h1>
 	</div>
 	<div id="language-select">
-		<html:link page="/Locale.do?locale=ru">Russian</html:link>
-		<html:link page="/Locale.do?locale=en">English</html:link>
+		<html:link page="/Locale.do?locale=ru" onclick="changeLanguage(this.href);">Russian</html:link>
+		<html:link page="/Locale.do?locale=en" onclick="changeLanguage(this.href);">English</html:link>
 	</div>
 </header>

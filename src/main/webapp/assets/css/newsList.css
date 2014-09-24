@@ -2,37 +2,56 @@
 	margin-top: -35px;
 }
 
-#news-list .title{
-	width: 75%;
+#news-list .title {
+	width: 70%;
+	margin-right: 75px;
 	float: left;
+	word-break: break-all;
 }
 
-#news-list .date{
+#news-list .date {
 	text-decoration: underline;
+	
 }
 
-#news-list .news-list-single-news{
+#news-list .title-date {
+	overflow: auto;
+}
+
+
+#news-list .news-list-single-news {
 	margin-top: 80px;
-	margin-left:40px;
+	margin-left: 40px;
 }
 
-
-#news-list .news-content{
+b {
+	display: block;
+}
+#news-list .news-content {
 	margin-top: 15px;
 	word-wrap: break-word;
 	width: 70%;
 }
 
-#news-list .nav-checkbox{
+#news-list .nav-checkbox {
 	float: right;
 	margin-top: 25px;
 	margin-right: 30px;
 }
 
-#news-list .nav-checkbox a{
+#news-list .nav-checkbox a {
 	margin-right: 15px;
 }
 
-#news-list .nav-checkbox input{
+#news-list .nav-checkbox input {
 	margin-top: 2px;
+}
+
+#delete-all-button {
+	margin-left: 85%;
+	margin-top: 70px;
+}
+
+#delete-all-button input{
+	padding: 3px 10px 3px 10px;
 }

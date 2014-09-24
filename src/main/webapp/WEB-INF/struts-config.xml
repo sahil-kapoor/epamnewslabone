@@ -23,21 +23,22 @@
 
 		<action path="/ListNews" type="by.epam.news.presentation.action.NewsAction"
 			parameter="list" name="NewsForm">
-			<forward name="list" path="/view/news/allNews.jsp" />
+			<forward name="list" path="allNewsPage" />
 		</action>
 
-		<action path="/AddNews" type="by.epam.news.presentation.action.NewsAction"
+		<action path="/AddNews"  type="by.epam.news.presentation.action.NewsAction"
 			parameter="add" scope="request" name="NewsForm">
-			<forward name="add" path="/view/news/addNews.jsp" />
+			<forward name="add" path="addNewsPage" />
 		</action>
 		
 		<action path="/NewsView" type="by.epam.news.presentation.action.NewsAction"
 			parameter="view" name="NewsForm">
-			<forward name="view" path="/view/news/showNews.jsp" />
+			<forward name="view" path="showNewsPage" />
 		</action>
 
 		<action path="/CreateNews" type="by.epam.news.presentation.action.NewsAction"
-			parameter="create" name="NewsForm" input="AddNews">
+			parameter="create"  cancellable="true" name="NewsForm" input="AddNews">
+			<forward name="list" path="/ListNews.do" redirect="true" />
 			<forward name="view" path="/NewsView.do" redirect="true" />
 		</action>
 		
@@ -48,22 +49,16 @@
 
 		<action path="/Locale" type="by.epam.news.presentation.action.NewsAction"
 			parameter="locale" name="NewsForm">
-			<forward name="back" path="/Back.do" redirect="true" />
-		</action>
-
-		<action path="/Back" type="by.epam.news.presentation.action.NewsAction"
-			parameter="back" name="NewsForm">
 			<forward name="list" path="/ListNews.do" redirect="true" />
-			<forward name="view" path="/NewsView.do" redirect="true" />
-			<forward name="add"  path="/AddNews.do"  redirect="true" />
 		</action>
-
 
 	</action-mappings>
 
+	<controller
+		processorClass="org.springframework.web.struts.DelegatingTilesRequestProcessor" />
+		
 	<message-resources parameter="by.epam.news.properties.News" />
-
-
+	
 
 	<plug-in className="org.apache.struts.tiles.TilesPlugin">
 		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />

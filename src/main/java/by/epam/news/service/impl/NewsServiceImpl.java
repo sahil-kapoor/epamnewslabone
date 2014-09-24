@@ -10,6 +10,10 @@ public class NewsServiceImpl implements NewsService{
 
 	private NewsDao dao;
 	
+	public NewsServiceImpl(){
+		System.out.println("service create");
+	}
+	
 	public void setDao(NewsDao dao){
 		this.dao = dao;
 	}

@@ -1,11 +1,26 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
- 
-	<import resource="config/database/pool/ConnectionPool.xml"/>
- 	<import resource="news/Spring-News.xml" />
- 	
- 	
- 	
+
+
+	<bean id="NewsDao" class="by.epam.news.database.impl.NewsDaoImpl">
+		<constructor-arg type="by.epam.news.database.ConnectionPool"
+			ref="connectionPool" />
+	</bean>
+
+	<bean id="springApplicationContext" class="by.epam.news.util.SpringApplicationContext" />
+
+	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl" >
+		<property name="dao" ref="NewsDao" />
+	</bean>
+
+	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool" destroy-method="destroy">
+		<constructor-arg type="java.lang.String" value="oracle.jdbc.OracleDriver" />
+		<constructor-arg type="java.lang.String"
+			value="jdbc:oracle:thin:@localhost:1521/XE" />
+		<constructor-arg type="java.lang.String" value="demeshko" />
+		<constructor-arg type="java.lang.String" value="wdv11lol" />
+	</bean>
+
 </beans>

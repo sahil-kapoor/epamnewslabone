@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
 <%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="navigable">
 	<html:link forward="ListNews">
 		<bean:message key="title.news.menu" />
@@ -15,7 +16,7 @@
 		<tr>
 			<td valign="top" class="td-shadow"><bean:message
 					key="label.news.title" /></td>
-			<td class="td-body"><div>
+			<td class="td-body"><div class="td-div-body">
 					<bean:write name="NewsForm" property="newsMessage.title" />
 				</div></td>
 		</tr>
@@ -23,15 +24,15 @@
 		<tr>
 			<td valign="top" class="td-shadow"><bean:message
 					key="label.news.news_date" /></td>
-			<td class="td-body"><div>
-					<bean:write name="NewsForm" property="newsMessage.date" />
+			<td class="td-body"><div class="td-div-body">
+					<bean:write name="NewsForm" property="newsMessage.dateString" />
 				</div></td>
 		</tr>
 
 		<tr class="space-under">
 			<td valign="top" class="td-shadow"><bean:message
 					key="label.news.brief" /></td>
-			<td class="td-body"><div>
+			<td class="td-body"><div class="td-div-body">
 					<bean:write name="NewsForm" property="newsMessage.brief" />
 				</div></td>
 		</tr>
@@ -39,7 +40,7 @@
 		<tr>
 			<td valign="top" class="td-shadow"><bean:message
 					key="label.news.content" /></td>
-			<td class="td-body"><div>
+			<td class="td-body"><div class="td-div-body">
 					<bean:write name="NewsForm" property="newsMessage.content" />
 				</div></td>
 		</tr>
@@ -47,17 +48,19 @@
 </div>
 
 <div id="news-view-control">
+<c:set var="newsId" scope="request" value="${NewsForm.newsMessage.id}"/>
 
- 	<html:form action="AddNews">
- 		<html:hidden name="NewsForm" property="newsMessage.id"/>
-		<html:submit>
+
+ 	<html:form action="AddNews" method="GET">
+ 		<input type="hidden" name="id" value="${newsId}">
+ 		<input type="hidden" name="last" value="view">
+		<html:submit> 
 			<bean:message key="label.common.button.edit" />
 		</html:submit>
 	</html:form>
-	<p>${newsMessage.id}xxx${NewsForm.newsMessage.id}xxx<bean:write name="NewsForm" property="newsMessage.id" /></p>
-	<html:form action="DeleteNews">
-	<html:hidden property="newsToDelete" value="${id}"></html:hidden>
 
+	<html:form action="DeleteNews">
+	<html:hidden property="newsToDelete" value="${newsId}"></html:hidden>	
 		<html:submit>
 			<bean:message key="label.common.button.delete" />
 		</html:submit>

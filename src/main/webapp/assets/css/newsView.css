@@ -11,6 +11,7 @@
 
 #news-view-body td {
 	table-layout: fixed;
+	padding: 10px;
 }
 
 #news-view-body .td-shadow {
@@ -20,17 +21,14 @@
 }
 
 #news-view-body .td-body div {
-	width: 35%;
+	width: 85%;
 	word-wrap: break-word;
 }
 
-#news-view-body tr {
-	line-height: 30px;
-}
 
 #news-view-body tr.space-under > td
 {
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 
 #news-view-control{

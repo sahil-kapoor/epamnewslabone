@@ -31,7 +31,8 @@ public class NewsAction extends MappingDispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		System.out.println("add");
-		String newsId = request.getParameter("id");		
+		request.setAttribute("last", request.getParameter("last"));
+		String newsId = request.getParameter("id");		 
 		if( null != newsId){
 			
 			News news = newsService.loadNews(Integer.parseInt(newsId));
@@ -44,6 +45,14 @@ public class NewsAction extends MappingDispatchAction {
 	public ActionForward create(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		if(isCancelled(request)){  	  
+			String last = request.getParameter("last");
+			System.out.println("last="+last);
+			if (null !=last && !last.equals("")){
+				return mapping.findForward(last);  	  
+			}
+			return mapping.findForward("list");
+	    }  
 		NewsForm news = (NewsForm)form;	
 		int id = newsService.saveNews(news.getNewsMessage());
 		System.out.println("create");
@@ -56,10 +65,13 @@ public class NewsAction extends MappingDispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		request.getSession().setAttribute(LAST_PAGE, "view");
-		News news = newsService.loadNews(Integer.parseInt(request.getParameter("id")));
-		NewsForm newsForm = (NewsForm)form;
-		System.out.println(news);
-		newsForm.setNewsMessage(news);
+		String newsId = request.getParameter("id");
+		if( null != newsId){
+			News news = newsService.loadNews(Integer.parseInt(newsId));
+			NewsForm newsForm = (NewsForm)form;
+			newsForm.setNewsMessage(news);
+		}
+
 		System.out.println("view");
 		return mapping.findForward("view");
 	}
@@ -92,20 +104,8 @@ public class NewsAction extends MappingDispatchAction {
 		request.getSession().setAttribute( Globals.LOCALE_KEY,
 				Locale.forLanguageTag(request.getParameter("locale")));
  
-		return mapping.findForward("back");
-	}
-	
-	public ActionForward back(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response){	
-
-		Object page = request.getSession().getAttribute(LAST_PAGE);
-		System.out.println("page=" + page);
-		if (null != page) {
-			return mapping.findForward((String) page);
-		}
 		return mapping.findForward("list");
 	}
 	
-
 
 }
