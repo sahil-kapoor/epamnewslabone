@@ -14,6 +14,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl" >
 		<property name="dao" ref="NewsDao" />
 	</bean>
+	
+	
 
 	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool" destroy-method="destroy">
 		<constructor-arg type="java.lang.String" value="oracle.jdbc.OracleDriver" />
@@ -24,3 +26,4 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	</bean>
 
 </beans>
+

@@ -2,6 +2,8 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
 <%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" type="text/css" href="assets/css/newsView.css">
+<script type="text/javascript" src="assets/js/view.jsp"></script>
 <div id="navigable">
 	<html:link forward="ListNews">
 		<bean:message key="title.news.menu" />
@@ -55,14 +57,14 @@
  		<input type="hidden" name="id" value="${newsId}">
  		<input type="hidden" name="last" value="view">
 		<html:submit> 
-			<bean:message key="label.common.button.edit" />
+			<bean:message key="label.news.button.edit" />
 		</html:submit>
 	</html:form>
 
 	<html:form action="DeleteNews">
 	<html:hidden property="newsToDelete" value="${newsId}"></html:hidden>	
-		<html:submit>
-			<bean:message key="label.common.button.delete" />
+		<html:submit styleId="delete-button">
+			<bean:message key="label.news.button.delete" />
 		</html:submit>
 	</html:form>
 </div>

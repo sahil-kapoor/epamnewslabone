@@ -1,3 +1,6 @@
+<%@page contentType="text/JavaScript" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
+
 window.onload = function() {
 	resizeTd();
 	init();
@@ -9,16 +12,22 @@ window.onresize = function() {
 }
 
 
+function init(){
+	setButtonListeners();
+	var brief = document.getElementById('brief-text');
+	var content = document.getElementById('content-text');	
+	brief.setAttribute('maxlength', 500);
+	content.setAttribute('maxlength', 2048);
+}
+
 function setButtonListeners(){
 	var submit = document.getElementById('submit-save-button');
 	var cancel = document.getElementById('cancel-save-button');
 	submit.setAttribute('onclick', "return validate();");
-	cancel.setAttribute('onclick', "return confirm('Are you sure to cancel?');");
+	cancel.setAttribute('onclick', "return confirm('<bean:message key="js.news.cancel" /> ');");
 }
 
-function onsubmitPress(){
-	return confirm("согласен?");
-}
+
 function validate(){
 	var title = document.getElementById('title-text');
 	var brief = document.getElementById('brief-text');
@@ -27,13 +36,6 @@ function validate(){
 	return checkTitle(title)&&checkDate(date)&&checkBrief(brief)&&checkContent(content);
 }
 
-function init(){
-	setButtonListeners();
-	var brief = document.getElementById('brief-text');
-	var content = document.getElementById('content-text');	
-	brief.setAttribute('maxlength', 500);
-	content.setAttribute('maxlength', 2048);
-}
 
 function resizeTd(){
 	var page = document.getElementById('news-view-body');	
@@ -46,7 +48,7 @@ function resizeTd(){
 function checkContent(content) {
 	var text = content.value;
 	if (text == ""){
-		alert("content must have value");
+		alert("'<bean:message key="js.news.bad.content" />'");
 		return false;
 	} else {
 		return true;
@@ -61,7 +63,7 @@ function setTodayDate(){
 function checkBrief(brief) {
 	var text = brief.value;
 	if (text == ""){
-		alert("brief must have value");
+		alert('<bean:message key="js.news.bad.brief" />');
 		return false;
 	} else {
 		return true;
@@ -71,7 +73,7 @@ function checkBrief(brief) {
 function checkTitle(title) {
 	var text = title.value;
 	if (text == ""){
-		alert("title must have value");
+		alert('<bean:message key="js.news.bad.title" />');
 		return false;
 	} else {
 		return true;
