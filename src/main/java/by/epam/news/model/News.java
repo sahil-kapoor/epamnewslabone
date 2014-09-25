@@ -1,8 +1,6 @@
 package by.epam.news.model;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -46,20 +44,6 @@ public class News implements Serializable {
 		return date;
 	}
 	
-	public String getDateString() {
-		if (null == date){
-			return "";
-		}
-		return new SimpleDateFormat("MM/dd/yyyy").format(date);
-	}
-
-	public void setDateString(String date) {
-		try {
-			this.date = new SimpleDateFormat("MM/dd/yyyy").parse(date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public void setDate(Date date) {
 		this.date = date;

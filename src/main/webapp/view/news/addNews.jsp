@@ -25,9 +25,11 @@
 
 			<tr>
 				<td valign="top"><bean:message key="label.news.news_date" />:</td>
-				<td><html:text styleId="date-text" name="NewsForm"
-						property="newsMessage.dateString"></html:text></td>
-				<td></td>
+				<td>
+<%-- 				<html:text styleId="date-text"  name="NewsForm"  --%>
+<%--  						property="newsMessage.date" ></html:text></td> --%>
+					<input  id="date-text" type="date" name="${NewsForm.newsMessage.date}" value="${NewsForm.newsMessage.date}" ></td>
+				
 			</tr>
 
 			<tr>

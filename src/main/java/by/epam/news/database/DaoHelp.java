@@ -5,8 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
 import java.util.Date;
+
+import org.apache.commons.beanutils.ConvertUtils;
 
 import by.epam.news.model.News;
 
@@ -35,24 +36,18 @@ public class DaoHelp {
 	public static News getOneNews(ResultSet result) throws SQLException {
 		int id = result.getInt(1);
 		String title = result.getString(2);
-		Date newsDate = result.getDate(3);
+		java.util.Date newsDate = ((Date) ConvertUtils.convert(
+				result.getDate(3), java.util.Date.class));
 		String brief = result.getString(4);
 		String content = result.getString(5);
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(newsDate);
-		java.util.Date x = calendar.getTime();
-
-		return new News(id, title, x, brief, content);
+		return new News(id, title, newsDate, brief, content);
 	}
 
 	public static void setOneNews(PreparedStatement statement, News news)
 			throws SQLException {
-		Calendar c = Calendar.getInstance();
-		c.setTime(news.getDate());
-		java.sql.Date x = new java.sql.Date(c.getTimeInMillis());
 		statement.setString(1, news.getTitle());
-		statement.setDate(2, x);
+		statement.setDate(2, (java.sql.Date) ConvertUtils.convert(
+				news.getDate(), java.sql.Date.class));
 		statement.setString(3, news.getBrief());
 		statement.setString(4, news.getContent());
 	}

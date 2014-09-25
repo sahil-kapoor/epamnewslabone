@@ -19,7 +19,7 @@
 						<b><bean:write name="news" property="title" /></b>
 					</div>
 					<div class="date">
-						<bean:write name="news" property="dateString" />
+						<bean:write name="news" format="MM/dd/yyyy" property="date" />
 					</div>
 				</div>
 	

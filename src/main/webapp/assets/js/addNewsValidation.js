@@ -1,7 +1,7 @@
 window.onload = function() {
 	resizeTd();
 	init();
-	
+	setTodayDate();
 };
 
 window.onresize = function() {
@@ -53,6 +53,11 @@ function checkContent(content) {
 	}
 }
 
+function setTodayDate(){
+	//var date = document.getElementById('date-text');
+	document.getElementById("date-text").valueAsDate = new Date();
+}
+
 function checkBrief(brief) {
 	var text = brief.value;
 	if (text == ""){
@@ -79,8 +84,8 @@ function checkDate(date) {
 		alert("date must have value");
 		return false;
 	} else {
-		var patt = /^(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d+$/;
-		alert(patt.test(text))
-		return false;
+		//var patt = /^(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d+$/;
+		//alert(patt.test(text))
+		return true;;
 	}
 }

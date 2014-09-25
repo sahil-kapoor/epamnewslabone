@@ -25,7 +25,7 @@
 			<td valign="top" class="td-shadow"><bean:message
 					key="label.news.news_date" /></td>
 			<td class="td-body"><div class="td-div-body">
-					<bean:write name="NewsForm" property="newsMessage.dateString" />
+					<bean:write name="NewsForm" property="newsMessage.date" format="MM/dd/yyyy"  />
 				</div></td>
 		</tr>
 

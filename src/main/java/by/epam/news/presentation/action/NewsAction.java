@@ -1,5 +1,7 @@
 package by.epam.news.presentation.action;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -104,6 +106,12 @@ public class NewsAction extends MappingDispatchAction {
 		request.getSession().setAttribute( Globals.LOCALE_KEY,
 				Locale.forLanguageTag(request.getParameter("locale")));
  
+		
+		 	SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH);
+	        System.out.println("date en = " + dateFormat.format( new Date() ) );
+	        dateFormat = new SimpleDateFormat("mm/dd/yyyy", Locale.forLanguageTag("ru"));
+	        System.out.println("date ru = " + dateFormat.format( new Date() ) );
+	        
 		return mapping.findForward("list");
 	}
 	
