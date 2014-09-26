@@ -7,12 +7,12 @@ import by.epam.news.model.News;
 
 public interface NewsService {
 
-	public int saveNews(News news);
+	public int saveNews(News news) throws ServiceException;
 	
-	public List<News> newsList();
+	public List<News> newsList() throws ServiceException;
 	
-	public News loadNews(int id);
+	public News loadNews(int id) throws ServiceException;
 	
-	public void deleteNews(int[] ids);
+	public void deleteNews(int[] ids) throws ServiceException;
 	
 }

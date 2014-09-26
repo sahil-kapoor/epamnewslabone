@@ -2,9 +2,10 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 
 window.onload = function() {
-	var cancel = document.getElementById('delete-all-button');
-	cancel.setAttribute('onclick', "return checkCheckBox();");
-}
+	var deleteButton = document.getElementById('delete-all-button');
+	deleteButton.setAttribute('onclick', "return checkCheckBox();");
+	deletedeletebutton();
+} 
 
 function checkCheckBox(){
 	var checks = document.getElementsByClassName("check-box");
@@ -16,4 +17,12 @@ function checkCheckBox(){
 	alert(' <bean:message key="js.news.delete.nothing" />');
 	return false;	
 }
+
+function deletedeletebutton(){
+ 	var checks = document.getElementsByClassName("check-box");
+	if(checks.length == 0){
+		document.getElementById('delete-all-button').remove();
+	}
+}
+
 

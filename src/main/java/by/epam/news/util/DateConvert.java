@@ -5,11 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;  
   
+import java.util.ResourceBundle;
+
 import org.apache.commons.beanutils.Converter;  
-  
+
 public class DateConvert implements Converter {  
       
-    private final static String pattern = "mm/dd/yyyy";  
+	private static ResourceBundle bundle = ResourceBundle.getBundle("by.epam.news.properties.News");
+    private final static String pattern = bundle.getString("news.date.format");  
     
     @Override
     public Object convert(@SuppressWarnings("rawtypes") Class type, Object value) {   
@@ -26,12 +29,12 @@ public class DateConvert implements Converter {
         }
           
         Date dateObj = null;  
-        if(value.getClass() == java.lang.String.class){   
+        if(value.getClass() == java.lang.String.class){  
             try{             	
                 return new SimpleDateFormat(pattern).parse((String)value);
             }catch(ParseException pe){  
-            	pe.printStackTrace();
-                return (null);  
+            	SystemLogger.getLogger().error("invalid date detected, returned current date", pe);           	
+                return new Date();  
             }  
         }  
           

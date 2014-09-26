@@ -26,7 +26,7 @@
 					</div>
 				</div>
 	
-				<div class="news-content">
+				<div class="news-brief">
 					<bean:write name="news" property="brief" />
 				</div>
 	

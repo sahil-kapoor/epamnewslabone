@@ -29,10 +29,8 @@
 			<tr>
 				<td valign="top"><bean:message key="label.news.news_date" />:</td>
 				<td>
-					<%-- 				<html:text styleId="date-text"  name="NewsForm"  --%> <%--  						property="newsMessage.date" ></html:text></td> --%>
-					<input id="date-text" type="date"
-					name="${NewsForm.newsMessage.date}"
-					value="${NewsForm.newsMessage.date}">
+					<input type="text" name="newsMessage.date" id="date-text"
+						value='<bean:write name="NewsForm" property="newsMessage.date" format="MM/dd/yyyy"  />'>
 				</td>
 
 			</tr>
@@ -53,9 +51,10 @@
 			<html:submit styleId="submit-save-button">
 				<bean:message key="label.news.button.submit" />
 			</html:submit>
-			<html:cancel styleId="cancel-save-button">
-				<bean:message key="label.news.button.cancel" />
-			</html:cancel>
+			<input type="button" value='<bean:message key="label.news.button.cancel" />' />
+<%-- 			<html:cancel styleId="cancel-save-button"> --%>
+<%-- 				<bean:message key="label.news.button.cancel" /> --%>
+<%-- 			</html:cancel> --%>
 		</div>
 	</html:form>
 </div>

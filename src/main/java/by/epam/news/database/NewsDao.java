@@ -7,14 +7,14 @@ import by.epam.news.model.News;
 
 public interface NewsDao {
 	
-	int addNews(News news);
+	int addNews(News news) throws DataBaseException;
 	
-	List<News> loadAllNews();
+	List<News> loadAllNews() throws DataBaseException;
 	
-	News loadNews(int id);
+	News loadNews(int id) throws DataBaseException;
 	
-	void editNews(News news);
+	void editNews(News news) throws DataBaseException;
 	
-	void deleteNews(int[] ids);
+	void deleteNews(int[] ids) throws DataBaseException;
 	
 }

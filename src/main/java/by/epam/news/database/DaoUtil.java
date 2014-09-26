@@ -10,25 +10,27 @@ import java.util.Date;
 import org.apache.commons.beanutils.ConvertUtils;
 
 import by.epam.news.model.News;
+import by.epam.news.util.SystemLogger;
 
-public class DaoHelp {
+public class DaoUtil {
 
 	public static void closeStatementAndConnection(Statement statement,
-			Connection connection, ConnectionPool pool) throws Exception {
+			Connection connection, ConnectionPool pool) throws DataBaseException {
 		if (null != statement) {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				// logging
+				SystemLogger.getLogger().error("Can't close statment", e); 
 			}
 		}
 		try {
 			pool.returnConnection(connection);
-		} catch (Exception e) {
+		} catch (DataBaseException e) {
 			try {
 				connection.close();
+				throw new DataBaseException("Can't return connection to pool");
 			} catch (SQLException e1) {
-				// logging
+				SystemLogger.getLogger().error("Can't close connection", e); 
 			}
 		}
 	}
@@ -50,6 +52,17 @@ public class DaoHelp {
 				news.getDate(), java.sql.Date.class));
 		statement.setString(3, news.getBrief());
 		statement.setString(4, news.getContent());
+	}
+	
+	public static void closeResultSet(ResultSet result){
+		if ( null != result){
+			try {
+				result.close();
+			} catch (SQLException e) {
+				SystemLogger.getLogger().error("Can't close result set", e); 
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

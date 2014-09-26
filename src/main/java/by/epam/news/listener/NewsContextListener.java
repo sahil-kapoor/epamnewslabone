@@ -1,9 +1,11 @@
-package by.epam.news.util;
+package by.epam.news.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.apache.commons.beanutils.ConvertUtils;
+
+import by.epam.news.util.DateConvert;
 
 public class NewsContextListener implements ServletContextListener {
 

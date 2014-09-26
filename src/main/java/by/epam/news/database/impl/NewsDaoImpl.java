@@ -3,12 +3,14 @@ package by.epam.news.database.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import by.epam.news.database.ConnectionPool;
-import by.epam.news.database.DaoHelp;
+import by.epam.news.database.DaoUtil;
+import by.epam.news.database.DataBaseException;
 import by.epam.news.database.NewsDao;
 import by.epam.news.database.SqlScriptMaker;
 import by.epam.news.model.News;
@@ -22,111 +24,107 @@ public class NewsDaoImpl implements NewsDao {
 	}
 
 	@Override
-	public int addNews(News news) {
+	public int addNews(News news) throws DataBaseException{
 		Connection connection = null;
-		try {
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {		
 			connection = pool.getConnection();
-			String generatedColumns[] = { "ID" };
-			PreparedStatement statement = connection
+			String RETURN_ID = "ID";
+			String generatedColumns[] = { RETURN_ID };
+			statement = connection
 					.prepareStatement(SqlScriptMaker.getAdd(),  generatedColumns);
-			DaoHelp.setOneNews(statement, news);
+			DaoUtil.setOneNews(statement, news);
 			statement.executeUpdate();
-			ResultSet keys = statement.getGeneratedKeys();  	
-			keys.next();  
-			int key = keys.getInt(1);
-			keys.close();  
-			DaoHelp.closeStatementAndConnection(statement, connection, pool);
+			result = statement.getGeneratedKeys();  	
+			result.next();  
+			int key = result.getInt(1);			 			
 			return key; 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new DataBaseException("Can't execute sql when add news", e);
+		} finally {
+			DaoUtil.closeResultSet(result);		 
+			DaoUtil.closeStatementAndConnection(statement, connection, pool);
 		}
-		return -1;
 	}
 
 	@Override
-	public List<News> loadAllNews() {
+	public List<News> loadAllNews() throws DataBaseException{
 		Connection connection = null;
 		List<News> newsList = new ArrayList<News>();
+		Statement statement = null;
+		ResultSet result = null;
 		try {
 			connection = pool.getConnection();
-			Statement statement = connection.createStatement();	
-			ResultSet result = statement.executeQuery(SqlScriptMaker.getLoadAll());
+			statement = connection.createStatement();	
+			result = statement.executeQuery(SqlScriptMaker.getLoadAll());
 			while (result.next()) {
-				newsList.add(DaoHelp.getOneNews(result));
+				newsList.add(DaoUtil.getOneNews(result));
 			}
-			DaoHelp.closeStatementAndConnection(statement, connection, pool);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new DataBaseException("Can't execute sql when load all news", e);
+		} finally {
+			DaoUtil.closeResultSet(result);		
+			DaoUtil.closeStatementAndConnection(statement, connection, pool);
 		}
 		return newsList;
 	}
 
 	@Override
-	public News loadNews(int id) {
+	public News loadNews(int id) throws DataBaseException{
 		Connection connection = null;
+		Statement statement = null;
+		ResultSet result = null;
 		try {
 			connection = pool.getConnection();
-			Statement statement = connection.createStatement();		
-			ResultSet result = statement.executeQuery(SqlScriptMaker.getLoadOne(id));
+			statement = connection.createStatement();		
+			result = statement.executeQuery(SqlScriptMaker.getLoadOne(id));
 			News news = null;
 			while (result.next()) {				
-				news = DaoHelp.getOneNews(result);
+				news = DaoUtil.getOneNews(result);
 			}
-			DaoHelp.closeStatementAndConnection(statement, connection, pool);
+			result.close();
 			return news;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new DataBaseException("Can't execute sql when load all news", e);
+		} finally {
+			DaoUtil.closeResultSet(result);		
+			DaoUtil.closeStatementAndConnection(statement, connection, pool);
 		}
-		return null;
 	}
 
 	@Override
-	public void editNews(News news) {
+	public void editNews(News news) throws DataBaseException{
 		Connection connection = null;
+		PreparedStatement statement = null;
 		try {
 			connection = pool.getConnection();
-			PreparedStatement statement = connection
+			statement = connection
 					.prepareStatement(SqlScriptMaker.getUpdate());		
-			DaoHelp.setOneNews(statement, news);
+			DaoUtil.setOneNews(statement, news);
 			statement.setInt(5, news.getId());
 			statement.executeUpdate();
-			DaoHelp.closeStatementAndConnection(statement, connection, pool);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new DataBaseException("Can't execute sql when edit news", e);
+		} finally {		
+			DaoUtil.closeStatementAndConnection(statement, connection, pool);
 		}
 	}
 
 	@Override
-	public void deleteNews(int[] ids) {
+	public void deleteNews(int[] ids) throws DataBaseException{
 		Connection connection = null;
+		Statement statement = null;
 		try {
 			connection = pool.getConnection();
-			Statement statement = connection.createStatement();	
+			statement = connection.createStatement();	
 			statement.execute(SqlScriptMaker.getDelete(ids));		
-			DaoHelp.closeStatementAndConnection(statement, connection, pool);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new DataBaseException("Can't execute sql when delete news", e);
+		} finally {
+			DaoUtil.closeStatementAndConnection(statement, connection, pool);
 		}
 	}
 	
-	public void Test(){
-		Connection connection = null;
-		try {
-			connection = pool.getConnection();
-			Statement statement = connection.createStatement();	
-			statement.execute(	"CREATE SEQUENCE news_id_seq START WITH 1 INCREMENT BY 1 NOMAXVALUE");
-			//statement.execute("CREATE OR REPLACE TRIGGER news_trigger BEFORE INSERT ON News REFERENCING NEW AS NEW FOR EACH ROW BEGIN SELECT news_id_seq.nextval INTO :NEW.ID FROM dual; END;");
-
-			DaoHelp.closeStatementAndConnection(statement, connection, pool);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 }

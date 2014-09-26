@@ -2,14 +2,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 
 window.onload = function() {
-	resizeTd();
 	init();
-	setTodayDate();
 };
 
-window.onresize = function() {
-	resizeTd();
-}
 
 
 function init(){
@@ -24,9 +19,15 @@ function setButtonListeners(){
 	var submit = document.getElementById('submit-save-button');
 	var cancel = document.getElementById('cancel-save-button');
 	submit.setAttribute('onclick', "return validate();");
-	cancel.setAttribute('onclick', "return confirm('<bean:message key="js.news.cancel" /> ');");
+	cancel.setAttribute('onclick', "return cancel();");
 }
 
+function cancel(){
+	if(confirm('<bean:message key="js.news.cancel" /> ')){
+		javascript:history.back();
+	}
+	return false;
+}
 
 function validate(){
 	var title = document.getElementById('title-text');
@@ -34,15 +35,6 @@ function validate(){
 	var content = document.getElementById('content-text');
 	var date = document.getElementById('date-text');
 	return checkTitle(title)&&checkDate(date)&&checkBrief(brief)&&checkContent(content);
-}
-
-
-function resizeTd(){
-	var page = document.getElementById('news-view-body');	
-	var div = document.getElementsByClassName("td-div-body");	
-	for (var i = 0; i < div.length; ++i) {
-	   div[i].style.width = 0.65*page.offsetWidth;
-	}
 }
 
 function checkContent(content) {
@@ -53,11 +45,6 @@ function checkContent(content) {
 	} else {
 		return true;
 	}
-}
-
-function setTodayDate(){
-	//var date = document.getElementById('date-text');
-	document.getElementById("date-text").valueAsDate = new Date();
 }
 
 function checkBrief(brief) {
@@ -83,11 +70,25 @@ function checkTitle(title) {
 function checkDate(date) {
 	var text = date.value;
 	if (text == ""){
-		alert("date must have value");
+		alert('<bean:message key="js.news.not.date" />');
 		return false;
 	} else {
-		//var patt = /^(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d+$/;
-		//alert(patt.test(text))
-		return true;;
+			var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
+		    if (matches == null){
+		     alert('<bean:message key="js.news.bad.date" />');
+		     return false;
+		    }
+		    var d = matches[2];
+		    var m = matches[1] - 1;
+		    var y = matches[3];
+		    var composedDate = new Date(y, m, d);
+		    if (composedDate.getDate() == d &&
+		        composedDate.getMonth() == m &&
+		        composedDate.getFullYear() == y){
+		       	 	return true;
+		        } else {
+		        	alert('<bean:message key="js.news.imposible.date" />');
+		        	return false;
+		        }		 
 	}
 }

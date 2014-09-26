@@ -1,14 +1,10 @@
-package by.epam.news.util;
+package by.epam.news.filter;
 
 import javax.servlet.*;
+
+
 import java.io.IOException;
 
-/**
- * Encoding filter.
- * <p>
- *     Set utf-8 coding to all requests.
- * </p>
- */
 public class EncodingFilter implements Filter {
 
     private String encoding = "utf-8";
@@ -28,7 +24,7 @@ public class EncodingFilter implements Filter {
     }
 
     public void destroy() {
-        // nothing todo
+        // nothing to do
     }
 
 }
