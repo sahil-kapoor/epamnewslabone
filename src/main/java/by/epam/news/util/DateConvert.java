@@ -9,6 +9,15 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.beanutils.Converter;  
 
+/**
+ * Data convert.
+ * 
+ * Convert String and java.sql.Date to java.util.Date.
+ * Allows to convert string  in only format MM/dd/yyyy.
+ * If conversion fails return current date.
+ * @author Alexander_Demeshko
+ *
+ */
 public class DateConvert implements Converter {  
       
 	private static ResourceBundle bundle = ResourceBundle.getBundle("by.epam.news.properties.News");

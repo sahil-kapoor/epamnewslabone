@@ -3,16 +3,11 @@
 <%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" type="text/css" href="assets/css/newsView.css">
-<script type="text/javascript" src="assets/js/view.jsp"></script>
-<div id="navigable">
-	<html:link forward="ListNews">
-		<bean:message key="title.news.menu" />
-	</html:link>
-	>>
-	<bean:message key="link.news.show_news" />
-</div>
+<script type="text/javascript" src="assets/js/view.js"></script>
 
-
+<script type="text/javascript">
+	var deleteSingle = '<bean:message key="js.news.delete.single" />'
+</script>
 <div id="news-view-body">
 	<table>
 		<tr>
@@ -50,12 +45,12 @@
 </div>
 
 <div id="news-view-control">
+
 <c:set var="newsId" scope="request" value="${NewsForm.newsMessage.id}"/>
 
 
  	<html:form action="AddNews" method="GET">
  		<input type="hidden" name="id" value="${newsId}">
- 		<input type="hidden" name="last" value="view">
 		<html:submit> 
 			<bean:message key="label.news.button.edit" />
 		</html:submit>
@@ -69,4 +64,4 @@
 	</html:form>
 </div>
 
-
+<input  id="current-page-hidden" type="hidden" value='<bean:message key="link.news.show_news" />'/>

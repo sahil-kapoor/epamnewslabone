@@ -2,7 +2,13 @@ package by.epam.news.database;
 
 import java.util.ResourceBundle;
 
-
+/**
+ * Help class.
+ * 
+ * Help dao to get sql code from properties fales. 
+ * @author Alexander_Demeshko
+ *
+ */
 public class SqlScriptMaker {
 	
 	
@@ -11,6 +17,7 @@ public class SqlScriptMaker {
 	private static final String ADD = "add";
 	private static final String UPDATE = "update";
 	private static final String DELETE = "delete";
+	
 	
 	private static ResourceBundle bundle = ResourceBundle.getBundle("by.epam.news.properties.SqlScripts");
 	
@@ -36,6 +43,13 @@ public class SqlScriptMaker {
 	}
 
 
+	/**
+	 * Get Delete.
+	 * 
+	 * Return delete script. Script generating from array.
+	 * @param ids
+	 * @return SQL string
+	 */
 	public static String getDelete(int[] ids) {
 		StringBuilder sql = new StringBuilder(bundle.getString(DELETE));
 		sql.append("(");

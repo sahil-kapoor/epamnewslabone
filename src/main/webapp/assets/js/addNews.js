@@ -1,5 +1,3 @@
-<%@page contentType="text/JavaScript" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 
 window.onload = function() {
 	init();
@@ -12,18 +10,18 @@ function init(){
 	var brief = document.getElementById('brief-text');
 	var content = document.getElementById('content-text');	
 	brief.setAttribute('maxlength', 500);
-	content.setAttribute('maxlength', 2048);
+	content.setAttribute('maxlength', 2000);
 }
 
 function setButtonListeners(){
 	var submit = document.getElementById('submit-save-button');
 	var cancel = document.getElementById('cancel-save-button');
 	submit.setAttribute('onclick', "return validate();");
-	cancel.setAttribute('onclick', "return cancel();");
+	cancel.setAttribute('onclick', "return cancelAdd();");
 }
 
-function cancel(){
-	if(confirm('<bean:message key="js.news.cancel" /> ')){
+function cancelAdd(){
+	if(confirm(cancel)){
 		javascript:history.back();
 	}
 	return false;
@@ -40,9 +38,12 @@ function validate(){
 function checkContent(content) {
 	var text = content.value;
 	if (text == ""){
-		alert("'<bean:message key="js.news.bad.content" />'");
+		alert(invalidContent);
 		return false;
 	} else {
+		if(text.length > 2000){
+			return false;
+		}
 		return true;
 	}
 }
@@ -50,9 +51,12 @@ function checkContent(content) {
 function checkBrief(brief) {
 	var text = brief.value;
 	if (text == ""){
-		alert('<bean:message key="js.news.bad.brief" />');
+		alert(invalidBrief);
 		return false;
 	} else {
+		if(text.length > 500){
+			return false;
+		}
 		return true;
 	}
 }
@@ -60,9 +64,12 @@ function checkBrief(brief) {
 function checkTitle(title) {
 	var text = title.value;
 	if (text == ""){
-		alert('<bean:message key="js.news.bad.title" />');
+		alert(invalidTitle);
 		return false;
 	} else {
+		if(text.length > 100){
+			return false;
+		}
 		return true;
 	}
 }
@@ -70,12 +77,12 @@ function checkTitle(title) {
 function checkDate(date) {
 	var text = date.value;
 	if (text == ""){
-		alert('<bean:message key="js.news.not.date" />');
+		alert(invalidDate);
 		return false;
 	} else {
 			var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
 		    if (matches == null){
-		     alert('<bean:message key="js.news.bad.date" />');
+		     alert(invalid);
 		     return false;
 		    }
 		    var d = matches[2];
@@ -87,7 +94,7 @@ function checkDate(date) {
 		        composedDate.getFullYear() == y){
 		       	 	return true;
 		        } else {
-		        	alert('<bean:message key="js.news.imposible.date" />');
+		        	alert(imposibleDate);
 		        	return false;
 		        }		 
 	}

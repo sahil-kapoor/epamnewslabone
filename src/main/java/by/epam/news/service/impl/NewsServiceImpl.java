@@ -8,6 +8,12 @@ import by.epam.news.model.News;
 import by.epam.news.service.NewsService;
 import by.epam.news.service.ServiceException;
 
+/**
+ * Implementation for NewsService.
+ * 
+ * @author Alexander_Demeshko
+ *
+ */
 public class NewsServiceImpl implements NewsService {
 
 	private NewsDao dao;
@@ -16,6 +22,11 @@ public class NewsServiceImpl implements NewsService {
 		this.dao = dao;
 	}
 
+	/**
+	 * Save news.
+	 * Create new news or update existent news.
+	 * If news id != 0 update news, else create new news in database.
+	 */
 	@Override
 	public int saveNews(News news) throws ServiceException {
 

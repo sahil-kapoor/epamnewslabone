@@ -11,8 +11,8 @@
 	</form-beans>
 
 	<global-exceptions>
-		<exception key="error.global.mesage" type="java.io.Exception"
-			path="/view/errors/fatal.jsp" />
+		<exception key="error.global.mesage" type="java.lang.Exception"
+			path="/view/error/fatal.jsp" />
 	</global-exceptions>
 
 	<global-forwards>
@@ -24,37 +24,40 @@
 		<forward name="DeleteNews" path="/DeleteNews.do" />
 	</global-forwards>
 
-
-
 	<action-mappings>
 
-		<action path="/ListNews" type="by.epam.news.presentation.action.NewsAction"
+		<action path="/ListNews" type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="list" name="NewsForm">
 			<forward name="list" path="allNewsPage" redirect="false" />
+			<forward name="error" path="/view/error/fatal.jsp" redirect="false" />
 		</action>
 
-		<action path="/AddNews" type="by.epam.news.presentation.action.NewsAction"
+		<action path="/AddNews" type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="add" scope="request" name="NewsForm" input="ListNews">
 			<forward name="add" path="addNewsPage" redirect="false" />
+			<forward name="error404" path="/view/error/error404.jsp" redirect="false" />
 		</action>
 
-		<action path="/NewsView" type="by.epam.news.presentation.action.NewsAction"
+		<action path="/NewsView" type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="view" name="NewsForm" input="ListNews">
 			<forward name="view" path="showNewsPage" redirect="false" />
+			<forward name="error404" path="/view/error/error404.jsp" redirect="false" />
 		</action>
 
-		<action path="/CreateNews" type="by.epam.news.presentation.action.NewsAction"
+		<action path="/CreateNews" type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="create" cancellable="true" name="NewsForm" input="AddNews">
 			<forward name="list" path="/ListNews.do" redirect="true" />
 			<forward name="view" path="/NewsView.do" redirect="true" />
+			<forward name="error" path="/view/error/fatal.jsp" redirect="false" />
 		</action>
 
-		<action path="/DeleteNews" type="by.epam.news.presentation.action.NewsAction"
+		<action path="/DeleteNews" type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="delete" name="NewsForm" input="NewsView">
 			<forward name="list" path="/ListNews.do" redirect="true" />
+			<forward name="error" path="/view/error/fatal.jsp" redirect="false" />
 		</action>
 
-		<action path="/Locale" type="by.epam.news.presentation.action.NewsAction"
+		<action path="/Locale" type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="locale" name="NewsForm">
 			<forward name="list" path="/ListNews.do" redirect="true" />
 		</action>

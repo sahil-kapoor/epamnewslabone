@@ -5,6 +5,14 @@ import javax.servlet.*;
 
 import java.io.IOException;
 
+
+/**
+ * Encoding filter.
+ * Filter all request respond to custom encoding.
+ * Get encoding from web.xml param. By default using utf8.
+ * @author Alexander_Demeshko
+ *
+ */
 public class EncodingFilter implements Filter {
 
     private String encoding = "utf-8";

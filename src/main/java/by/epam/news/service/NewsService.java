@@ -4,6 +4,12 @@ import java.util.List;
 
 import by.epam.news.model.News;
 
+/**
+ * News service
+ * Using to connect Datavase with actions.
+ * @author Alexander_Demeshko
+ *
+ */
 
 public interface NewsService {
 

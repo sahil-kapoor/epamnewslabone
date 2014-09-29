@@ -127,3 +127,7 @@ footer {
 footer p {
 	text-align: center;
 }
+
+.error{
+	margin: 100px;
+}

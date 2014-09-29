@@ -15,14 +15,41 @@ import by.epam.news.database.NewsDao;
 import by.epam.news.database.SqlScriptMaker;
 import by.epam.news.model.News;
 
-public class NewsDaoImpl implements NewsDao {
-
+/**
+ * Class implements NewsDao @see by.epam.news.database.NewsDao. Based on JDBC. 
+ * 
+ * Goal of class is work with Oracle data base.
+ * 
+ * @author Alexander_Demeshko
+ *
+ */
+public class NewsDaoJdbc implements NewsDao {
+ 
+	/**
+	 * Connection pool
+	 * 
+	 * Pool used to getting connections to execute operations with Database.
+	 * @see by.epam.news.database.ConnectionPool
+	 */
 	private ConnectionPool pool;
 
-	public NewsDaoImpl(ConnectionPool pool) {
+	/**
+	 * Set pool. Spring injection used.
+	 * @param pool
+	 */
+	public NewsDaoJdbc(ConnectionPool pool) {
 		this.pool = pool;
 	}
 
+	/**
+	 * Add News
+	 * 
+	 * Insert new news to database.
+	 * 
+	 * @param news
+	 * @throws DataBaseException 
+	 * Throw DataBaseException when SQLException is result of executing insert. 
+	 */
 	@Override
 	public int addNews(News news) throws DataBaseException{
 		Connection connection = null;
@@ -48,6 +75,15 @@ public class NewsDaoImpl implements NewsDao {
 		}
 	}
 
+	/**
+	 * Load all News
+	 * 
+	 * Load All news from database.
+	 * 
+	 * @throws DataBaseException 
+	 * 
+	 * Throw DataBaseException when SQLException is result of executing query. 
+	 */
 	@Override
 	public List<News> loadAllNews() throws DataBaseException{
 		Connection connection = null;
@@ -70,6 +106,15 @@ public class NewsDaoImpl implements NewsDao {
 		return newsList;
 	}
 
+	/**
+	 * Load single News
+	 *
+	 * @param int
+	 * @throws DataBaseException 
+	 * 
+	 * Load news by id from database.
+	 * Throw DataBaseException when SQLException is result of executing query. 
+	 */
 	@Override
 	public News loadNews(int id) throws DataBaseException{
 		Connection connection = null;
@@ -93,6 +138,15 @@ public class NewsDaoImpl implements NewsDao {
 		}
 	}
 
+	/**
+	 * Edit news
+	 *
+	 * @param news
+	 * @throws DataBaseException 
+	 * 
+	 * Edit news.
+	 * Throw DataBaseException when SQLException is result of executing update. 
+	 */
 	@Override
 	public void editNews(News news) throws DataBaseException{
 		Connection connection = null;
@@ -111,6 +165,16 @@ public class NewsDaoImpl implements NewsDao {
 		}
 	}
 
+	/**
+	 * Delete News
+	 *
+	 * @param int[]
+	 * @throws DataBaseException 
+	 * 
+	 * Delete news using int array of news's id.
+	 * Throw DataBaseException when SQLException is result of executing query. 
+	 */
+	
 	@Override
 	public void deleteNews(int[] ids) throws DataBaseException{
 		Connection connection = null;
@@ -120,6 +184,7 @@ public class NewsDaoImpl implements NewsDao {
 			statement = connection.createStatement();	
 			statement.execute(SqlScriptMaker.getDelete(ids));		
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new DataBaseException("Can't execute sql when delete news", e);
 		} finally {
 			DaoUtil.closeStatementAndConnection(statement, connection, pool);

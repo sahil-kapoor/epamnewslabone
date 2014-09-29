@@ -4,20 +4,14 @@
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 
-	<bean id="NewsDao" class="by.epam.news.database.impl.NewsDaoImpl">
+	<bean id="NewsDao" class="by.epam.news.database.impl.NewsDaoJdbc">
 		<constructor-arg type="by.epam.news.database.ConnectionPool"
 			ref="connectionPool" />
 	</bean>
 
-	<bean id="springApplicationContext" class="by.epam.news.util.SpringApplicationContext" />
 
-	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl" >
-		<property name="dao" ref="NewsDao" />
-	</bean>
-	
-	
-
-	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool" destroy-method="destroy">
+	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool"
+		destroy-method="destroy">
 		<constructor-arg type="java.lang.String" value="oracle.jdbc.OracleDriver" />
 		<constructor-arg type="java.lang.String"
 			value="jdbc:oracle:thin:@localhost:1521/XE" />
@@ -25,6 +19,36 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<constructor-arg type="java.lang.String" value="wdv11lol" />
 	</bean>
 	
+	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl">
+		<property name="dao" ref="NewsDao" />
+	</bean>
+
+	<bean name="/ListNews" class="by.epam.news.presentation.action.NewsAction">
+		<property name="service" ref="NewsService" />
+	</bean>
+	
+	<bean name="/AddNews" class="by.epam.news.presentation.action.NewsAction">
+		<property name="service" ref="NewsService" />
+	</bean>
+	
+	<bean name="/NewsView" class="by.epam.news.presentation.action.NewsAction">
+		<property name="service" ref="NewsService" />
+	</bean>
+	
+	<bean name="/CreateNews" class="by.epam.news.presentation.action.NewsAction">
+		<property name="service" ref="NewsService" />
+	</bean>
+	
+	<bean name="/DeleteNews" class="by.epam.news.presentation.action.NewsAction">
+		<property name="service" ref="NewsService" />
+	</bean>
+	
+	<bean name="/Locale" class="by.epam.news.presentation.action.NewsAction">
+		<property name="service" ref="NewsService" />
+	</bean>
+	
+	
+
 
 
 </beans>
