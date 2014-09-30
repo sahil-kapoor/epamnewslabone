@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="error">
-	<h1><html:errors/></h1>
+	<h1><bean:message key="error.global.mesage"/></h1>
 	<html:link action="ListNews.do?"><bean:message key="error.back.main"/></html:link>
 </div>
 </body>

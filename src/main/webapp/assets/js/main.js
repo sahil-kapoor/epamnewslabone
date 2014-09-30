@@ -1,8 +1,6 @@
-
 window.addEventListener('load', setNavLink, false);
 
-
-function setNavLink() {	
+function setNavLink() {
 	var pageName = document.getElementById("current-page-hidden").value;
 	document.getElementById("page-name").innerHTML = ">>" + pageName;
 }
@@ -10,14 +8,13 @@ function setNavLink() {
 function changeLanguage(href) {
 	var req = getXmlHttp()
 	req.onreadystatechange = function() {
-		if (req.readyState == 4 && req.status == 200) {											
+		if (req.readyState == 4 && req.status == 200) {
 			location.reload();
 		}
 	}
 	req.open('GET', href, true);
-	req.send(null); 
+	req.send(null);
 }
-
 
 function getXmlHttp() {
 	var xmlhttp;

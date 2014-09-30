@@ -82,7 +82,7 @@ function checkDate(date) {
 	} else {
 			var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
 		    if (matches == null){
-		     alert(invalid);
+		     alert(invalidDate);
 		     return false;
 		    }
 		    var d = matches[2];
