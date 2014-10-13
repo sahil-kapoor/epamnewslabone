@@ -19,6 +19,6 @@ public interface NewsService {
 	
 	public News loadNews(int id) throws ServiceException;
 	
-	public void deleteNews(int[] ids) throws ServiceException;
+	public void deleteNews(Integer[] ids) throws ServiceException;
 	
 }

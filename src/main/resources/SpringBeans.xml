@@ -6,15 +6,21 @@
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
-			<value>classpath:by/epam/news/properties/database/connectionPool.properties</value>
+			<value>classpath:by/epam/news/properties/database/connectionPool.properties
+			</value>
 		</property>
 	</bean>
 
-	<bean id="NewsDao" class="by.epam.news.database.impl.NewsDaoJdbc">
+	<bean id="NewsDaoJdbc" class="by.epam.news.database.impl.NewsDaoJdbc">
 		<constructor-arg type="by.epam.news.database.ConnectionPool"
 			ref="connectionPool" />
 	</bean>
-
+	
+	<bean id="NewsDaoHibernate" class="by.epam.news.database.impl.NewsDaoHibernate">
+	</bean>
+	
+	<bean id="NewsDaoJpa" class="by.epam.news.database.impl.NewsDaoJpa">
+	</bean>
 
 	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool"
 		destroy-method="destroy">
@@ -25,7 +31,7 @@
 	</bean>
 
 	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl">
-		<property name="dao" ref="NewsDao" />
+		<property name="dao" ref="NewsDaoJpa" />
 	</bean>
 
 	<bean name="/ListNews" class="by.epam.news.presentation.action.NewsAction">
@@ -51,10 +57,6 @@
 	<bean name="/Locale" class="by.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
-
-
-
-
 
 </beans>
 

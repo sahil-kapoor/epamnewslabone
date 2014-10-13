@@ -15,6 +15,6 @@ public interface NewsDao {
 	
 	void editNews(News news) throws DataBaseException;
 	
-	void deleteNews(int[] ids) throws DataBaseException;
+	void deleteNews(Integer[] ids) throws DataBaseException;
 	
 }

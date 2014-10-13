@@ -12,7 +12,7 @@ public class NewsForm extends ActionForm{
 	
 	private News newsMessage;
 	private List<News> newsList;
-	private int[] newsToDelete;  
+	private Integer[] newsToDelete;  
 	
 	public NewsForm(){
 		newsMessage = new News();
@@ -35,11 +35,11 @@ public class NewsForm extends ActionForm{
 		this.newsList = newsList;
 	}
 
-	public int[] getNewsToDelete() {
+	public Integer[] getNewsToDelete() {
 		return newsToDelete;
 	}
 
-	public void setNewsToDelete(int[] newsToDelete) {
+	public void setNewsToDelete(Integer[] newsToDelete) {
 		this.newsToDelete = newsToDelete;
 	}
 

@@ -22,13 +22,13 @@ import by.epam.news.database.DataBaseException;
 import by.epam.news.database.NewsDao;
 import by.epam.news.model.News;
 
+
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:SpringBeansTest.xml" })
-@TransactionConfiguration(defaultRollback=true)  
-//@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
-//    DirtiesContextTestExecutionListener.class,
-//    TransactionalTestExecutionListener.class,
-//    DbUnitTestExecutionListener.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+    DirtiesContextTestExecutionListener.class,
+    DbUnitTestExecutionListener.class })
 
 public class TestNewsDaoJdbc {
 	
@@ -42,7 +42,7 @@ public class TestNewsDaoJdbc {
 	@SuppressWarnings("deprecation")
 	@Test
 	@Rollback(true)  
-	@DatabaseSetup("testData.xml")
+	@DatabaseSetup("classpath:testData.xml")
 	public void addNewsAndLoadTest() throws DataBaseException{
 		News newsToAdd = new News(0,"random title", new Date(), "random brief", "random content");
 		int id = dao.addNews(newsToAdd);

@@ -3,13 +3,24 @@ package by.epam.news.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name="DEMESHKO.NEWS")
 public class News implements Serializable {
 	
 
 	private static final long serialVersionUID = 6566437990774525688L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="NEWS_SEQ")
 	private int id;
+	
 	private String title;
 	private Date date;
 	private String brief;

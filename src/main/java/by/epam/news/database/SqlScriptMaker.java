@@ -50,7 +50,7 @@ public class SqlScriptMaker {
 	 * @param ids
 	 * @return SQL string
 	 */
-	public static String getDelete(int[] ids) {
+	public static String getDelete(Integer[] ids) {
 		StringBuilder sql = new StringBuilder(bundle.getString(DELETE));
 		sql.append("(");
 		for(int id : ids){

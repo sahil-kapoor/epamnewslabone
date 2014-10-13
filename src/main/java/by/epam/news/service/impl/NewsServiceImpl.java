@@ -62,7 +62,7 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public void deleteNews(int[] ids) throws ServiceException {
+	public void deleteNews(Integer[] ids) throws ServiceException {
 		try {
 			dao.deleteNews(ids);
 		} catch (DataBaseException e) {

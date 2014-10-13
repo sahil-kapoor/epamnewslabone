@@ -176,7 +176,7 @@ public class NewsDaoJdbc implements NewsDao {
 	 */
 	
 	@Override
-	public void deleteNews(int[] ids) throws DataBaseException{
+	public void deleteNews(Integer[] ids) throws DataBaseException{
 		Connection connection = null;
 		Statement statement = null;
 		try {
