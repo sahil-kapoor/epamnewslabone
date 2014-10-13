@@ -10,6 +10,10 @@ public final class Routes {
 	
 	public final static String ID = "id";
 	public final static String LOCALE = "locale";
+	public final static String LAST_PAGE = "last";
+	public final static String CURRENT_PAGE = "current";
+	public final static String LAST_ID = "lastId";
+	public final static String CURRENT_ID = "currentId";
 	
 	private Routes(){
 		

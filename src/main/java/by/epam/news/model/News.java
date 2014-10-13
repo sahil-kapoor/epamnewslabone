@@ -16,12 +16,19 @@ public class News implements Serializable {
 	private String content;
 	
 	public News(int id, String title, Date date, String brief, String content) {
-		super();
 		this.id = id;
 		this.title = title;
 		this.date = date;
 		this.brief = brief;
 		this.content = content;
+	}
+	
+	public News(){
+		this.id = 0;
+		this.title = "";
+		this.date = new Date();
+		this.brief = "";
+		this.content = "";
 	}
 
 	public int getId() {
@@ -70,5 +77,53 @@ public class News implements Serializable {
 		return "News [id=" + id + ", title=" + title + ", date=" + date
 				+ ", brief=" + brief + ", content=" + content + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((brief == null) ? 0 : brief.hashCode());
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		News other = (News) obj;
+		if (brief == null) {
+			if (other.brief != null)
+				return false;
+		} else if (!brief.equals(other.brief))
+			return false;
+		if (content == null) {
+			if (other.content != null)
+				return false;
+		} else if (!content.equals(other.content))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (id != other.id)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
+	}
+	
+	
 	 
 }

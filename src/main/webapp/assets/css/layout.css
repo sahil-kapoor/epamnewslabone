@@ -113,6 +113,12 @@ header #language-select {
 	margin:10px 0 0 10px;	
 }
 
+.inner-pre{
+	font-size: 16px;
+	font-family: serif;
+	white-space: pre-wrap;
+}
+
 footer {
 	width: 100%;
 	display: block;

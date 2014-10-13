@@ -1,8 +1,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:by/epam/news/properties/database/connectionPool.properties</value>
+		</property>
+	</bean>
 
 	<bean id="NewsDao" class="by.epam.news.database.impl.NewsDaoJdbc">
 		<constructor-arg type="by.epam.news.database.ConnectionPool"
@@ -12,13 +18,12 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool"
 		destroy-method="destroy">
-		<constructor-arg type="java.lang.String" value="oracle.jdbc.OracleDriver" />
-		<constructor-arg type="java.lang.String"
-			value="jdbc:oracle:thin:@localhost:1521/XE" />
-		<constructor-arg type="java.lang.String" value="demeshko" />
-		<constructor-arg type="java.lang.String" value="wdv11lol" />
+		<constructor-arg type="java.lang.String" value="${jdbc.driver}" />
+		<constructor-arg type="java.lang.String" value="${jdbc.url}" />
+		<constructor-arg type="java.lang.String" value="${jdbc.user}" />
+		<constructor-arg type="java.lang.String" value="${jdbc.password}" />
 	</bean>
-	
+
 	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl">
 		<property name="dao" ref="NewsDao" />
 	</bean>
@@ -26,28 +31,28 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean name="/ListNews" class="by.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
-	
+
 	<bean name="/AddNews" class="by.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
-	
+
 	<bean name="/NewsView" class="by.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
-	
+
 	<bean name="/CreateNews" class="by.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
-	
+
 	<bean name="/DeleteNews" class="by.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
-	
+
 	<bean name="/Locale" class="by.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
-	
-	
+
+
 
 
 

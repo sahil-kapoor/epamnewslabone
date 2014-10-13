@@ -26,40 +26,51 @@
 
 	<action-mappings>
 
-		<action path="/ListNews" type="org.springframework.web.struts.DelegatingActionProxy"
+		<action path="/ListNews"
+			type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="list" scope="request" name="NewsForm">
 			<forward name="list" path="allNewsPage" redirect="false" />
-			<forward name="error"  path="/view/error/fatal.jsp"  redirect="false" />
+			<forward name="error" path="/view/error/fatal.jsp" redirect="false" />
 		</action>
 
-		<action path="/AddNews" type="org.springframework.web.struts.DelegatingActionProxy"
+		<action path="/AddNews"
+			type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="add" scope="request" name="NewsForm" input="ListNews">
 			<forward name="add" path="addNewsPage" redirect="false" />
-			<forward name="error404" path="/view/error/error404.jsp" redirect="false" />
+			<forward name="error404" path="/view/error/error404.jsp"
+				redirect="false" />
 		</action>
 
-		<action path="/NewsView" type="org.springframework.web.struts.DelegatingActionProxy"
-			parameter="view" scope="request" name="NewsForm" input="ListNews">
+		<action path="/NewsView"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="view"  scope="request" name="NewsForm"
+			input="ListNews">
 			<forward name="view" path="showNewsPage" redirect="false" />
-			<forward name="error404" path="/view/error/error404.jsp" redirect="false" />
+			<forward name="error404" path="/view/error/error404.jsp"
+				redirect="false" />
 		</action>
 
-		<action path="/CreateNews" type="org.springframework.web.struts.DelegatingActionProxy"
-			parameter="create" scope="request" name="NewsForm" input="AddNews">
+		<action path="/CreateNews"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="create" cancellable="true" scope="request" name="NewsForm" input="AddNews">
 			<forward name="list" path="/ListNews.do" redirect="true" />
 			<forward name="view" path="/NewsView.do" redirect="true" />
 			<forward name="error" path="/view/error/fatal.jsp" redirect="false" />
 		</action>
 
-		<action path="/DeleteNews" type="org.springframework.web.struts.DelegatingActionProxy"
-			parameter="delete"  scope="request" name="NewsForm" input="NewsView">
+		<action path="/DeleteNews"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="delete" scope="request" name="NewsForm" input="NewsView">
 			<forward name="list" path="/ListNews.do" redirect="true" />
 			<forward name="error" path="/view/error/fatal.jsp" redirect="false" />
 		</action>
 
-		<action path="/Locale" type="org.springframework.web.struts.DelegatingActionProxy"
+		<action path="/Locale"
+			type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="locale" name="NewsForm">
 			<forward name="list" path="/ListNews.do" redirect="true" />
+			<forward name="add"  path="/AddNews.do"  redirect="true" />
+			<forward name="view" path="/NewsView.do" redirect="true" />
 		</action>
 
 	</action-mappings>
@@ -67,7 +78,7 @@
 	<controller
 		processorClass="org.springframework.web.struts.DelegatingTilesRequestProcessor" />
 
-	<message-resources parameter="by.epam.news.properties.News" />
+	<message-resources parameter="by.epam.news.properties.news.News" />
 
 
 	<plug-in className="org.apache.struts.tiles.TilesPlugin">

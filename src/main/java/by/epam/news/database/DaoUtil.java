@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 
 import org.apache.commons.beanutils.ConvertUtils;
 
@@ -68,8 +67,7 @@ public final class DaoUtil {
 	public static News getOneNews(ResultSet result) throws SQLException {
 		int id = result.getInt(1);
 		String title = result.getString(2);
-		java.util.Date newsDate = ((Date) ConvertUtils.convert(
-				result.getDate(3), java.util.Date.class));
+		java.util.Date newsDate = result.getDate(3);
 		String brief = result.getString(4);
 		String content = result.getString(5);
 		return new News(id, title, newsDate, brief, content);

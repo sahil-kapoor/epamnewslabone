@@ -8,13 +8,18 @@
 <script type="text/javascript">
 	var deleteSingle = '<bean:message key="js.news.delete.single" />'
 </script>
+
+<c:set var="last" scope="session" value="view"/>
+<c:set var="lastId" scope="session" value="${NewsForm.newsMessage.id}"/>
+<c:set var="currentId" scope="session" value="${NewsForm.newsMessage.id}"/>
+<c:set var="current" scope="session" value="view"/>
 <div id="news-view-body">
 	<table>
 		<tr>
 			<td valign="top" class="td-shadow"><bean:message
 					key="label.news.title" /></td>
 			<td class="td-body"><div class="td-div-body">
-					<bean:write name="NewsForm" property="newsMessage.title" />
+					<pre><span class="inner-pre"><bean:write name="NewsForm" property="newsMessage.title" /></span></pre>
 				</div></td>
 		</tr>
 
@@ -22,7 +27,7 @@
 			<td valign="top" class="td-shadow"><bean:message
 					key="label.news.news_date" /></td>
 			<td class="td-body"><div class="td-div-body">
-					<bean:write name="NewsForm" property="newsMessage.date" format="MM/dd/yyyy"  />
+					<bean:write name="NewsForm" property="newsMessage.date" formatKey="news.date.format"  />
 				</div></td>
 		</tr>
 
@@ -30,7 +35,7 @@
 			<td valign="top" class="td-shadow"><bean:message
 					key="label.news.brief" /></td>
 			<td class="td-body"><div class="td-div-body">
-					<bean:write name="NewsForm" property="newsMessage.brief" />
+					<pre><span class="inner-pre"><bean:write name="NewsForm" property="newsMessage.brief" /></span></pre>
 				</div></td>
 		</tr>
 		
@@ -38,7 +43,7 @@
 			<td valign="top" class="td-shadow"><bean:message
 					key="label.news.content" /></td>
 			<td class="td-body"><div class="td-div-body">
-					<bean:write name="NewsForm" property="newsMessage.content" />
+					<pre><span class="inner-pre"><bean:write name="NewsForm" property="newsMessage.content" /></span></pre>
 				</div></td>
 		</tr>
 	</table>

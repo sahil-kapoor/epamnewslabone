@@ -22,7 +22,7 @@ function setButtonListeners(){
 
 function cancelAdd(){
 	if(confirm(cancel)){
-		javascript:history.back();
+		return true;
 	}
 	return false;
 }
@@ -32,7 +32,7 @@ function validate(){
 	var brief = document.getElementById('brief-text');
 	var content = document.getElementById('content-text');
 	var date = document.getElementById('date-text');
-	return checkTitle(title)&&checkDate(date)&&checkBrief(brief)&&checkContent(content);
+	return checkTitle(title)&&checkBrief(brief)&&checkContent(content)&&checkDate(date);
 }
 
 function checkContent(content) {
@@ -76,26 +76,80 @@ function checkTitle(title) {
 
 function checkDate(date) {
 	var text = date.value;
-	if (text == ""){
-		alert(invalidDate);
-		return false;
-	} else {
-			var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
-		    if (matches == null){
-		     alert(invalidDate);
-		     return false;
-		    }
-		    var d = matches[2];
-		    var m = matches[1] - 1;
-		    var y = matches[3];
-		    var composedDate = new Date(y, m, d);
-		    if (composedDate.getDate() == d &&
-		        composedDate.getMonth() == m &&
-		        composedDate.getFullYear() == y){
-		       	 	return true;
-		        } else {
-		        	alert(imposibleDate);
-		        	return false;
-		        }		 
-	}
+	var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
+    if (matches == null){
+	    alert(invalidDate);
+	    return false;
+    }  
+    var d, m, y;
+    if( lang == "ru"){
+    	 d = matches[1];
+    	 m = matches[2] - 1;
+    	 y = matches[3];
+    }
+    if( lang == "en"){
+    	d = matches[2];
+        m = matches[1] - 1;
+        y = matches[3];
+    }
+    var composedDate = new Date(y, m, d);
+    if (composedDate.getDate() == d &&
+	        composedDate.getMonth() == m &&
+	        composedDate.getFullYear() == y){
+    	m = m +1;
+    	date.value = m+"/"+d+"/"+y;
+    	return true;
+    }
+    alert(imposibleDate);
+	return false;
+}
+
+
+
+function checkRusDate(date){
+	var text = date.value;
+	var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
+    if (matches == null){
+	    alert(invalidDate);
+	    return false;
+    }
+    var d = matches[1] - 1;
+    var m = matches[2];
+    var y = matches[3];
+    var composedDate = new Date(y, m, d);
+    if (composedDate.getDate() == d &&
+	        composedDate.getMonth() == m &&
+	        composedDate.getFullYear() == y){
+    	return true;
+    }
+    alert(imposibleDate);
+	return false;
+}
+
+
+function checkEngDate(date){
+	var text = date.value;
+	var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
+    if (matches == null){
+	    alert(invalidDate);
+	    return false;
+    }
+    var d = matches[2];
+    var m = matches[1] - 1;
+    var y = matches[3];
+    var composedDate = new Date(y, m, d);
+    if (composedDate.getDate() == d &&
+	        composedDate.getMonth() == m &&
+	        composedDate.getFullYear() == y){
+    	return true;
+    }
+    alert(imposibleDate);
+	return false;
+}
+
+function getRusDate(matches) {
+	var d = matches[1] - 1;
+    var m = matches[2] - 1;
+    var y = matches[3];
+    var composedDate = new Date(y, m, d);	
 }

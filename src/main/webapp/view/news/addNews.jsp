@@ -13,7 +13,14 @@
 	var invalidTitle = '<bean:message key="js.news.bad.title" />';
 	var imposibleDate = '<bean:message key="js.news.imposible.date" />';
 	var cancel = '<bean:message key="js.news.cancel" />';
+	var lang = '<bean:message key="js.news.lang" />';
 </script>
+<c:set var="current" scope="session" value="add"/>
+<c:set var="currentId" scope="session" value="${NewsForm.newsMessage.id}"/>
+
+<input type="hidden" id="hidden-locale" value="${pageContext.response.locale}" />
+
+
 <div id="add-form">
 	<html:form action="CreateNews">
 		<html:errors />
@@ -29,9 +36,9 @@
 
 			<tr>
 				<td valign="top"><bean:message key="label.news.news_date" />:</td>
-				<td>
-					<input type="text" name="newsMessage.date" id="date-text" maxlength="10"
-						value='<bean:write name="NewsForm" property="newsMessage.date" format="MM/dd/yyyy"/>'>
+				<td><input type="text" name="newsMessage.date" id="date-text"
+					maxlength="10"
+					value='<bean:write name="NewsForm" property="newsMessage.date" formatKey="news.date.format"/>'>
 				</td>
 
 			</tr>
@@ -52,9 +59,12 @@
 			<html:submit styleId="submit-save-button">
 				<bean:message key="label.news.button.submit" />
 			</html:submit>
-			<input type="button" id="cancel-save-button" value='<bean:message key="label.news.button.cancel" />' />			
+			<html:cancel styleId="cancel-save-button">
+ 				<bean:message key="label.news.button.cancel" />
+ 			</html:cancel>
 		</div>
 	</html:form>
 </div>
 
-<input id="current-page-hidden" type="hidden" value='<bean:message key="link.news.add_news" />'/>
+<input id="current-page-hidden" type="hidden"
+	value='<bean:message key="link.news.add_news" />' />

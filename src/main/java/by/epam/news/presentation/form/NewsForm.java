@@ -1,7 +1,6 @@
 package by.epam.news.presentation.form;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -16,7 +15,7 @@ public class NewsForm extends ActionForm{
 	private int[] newsToDelete;  
 	
 	public NewsForm(){
-		newsMessage = new News(0, "", new Date(), "", "");
+		newsMessage = new News();
 		newsList = new ArrayList<News>();
 	}
 

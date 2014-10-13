@@ -19,7 +19,7 @@ public class SqlScriptMaker {
 	private static final String DELETE = "delete";
 	
 	
-	private static ResourceBundle bundle = ResourceBundle.getBundle("by.epam.news.properties.SqlScripts");
+	private static ResourceBundle bundle = ResourceBundle.getBundle("by.epam.news.properties.database.SqlScripts");
 	
 	
 	

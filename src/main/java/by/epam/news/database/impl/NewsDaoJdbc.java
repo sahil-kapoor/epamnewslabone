@@ -29,7 +29,7 @@ public class NewsDaoJdbc implements NewsDao {
 	 * Connection pool
 	 * 
 	 * Pool used to getting connections to execute operations with Database.
-	 * @see by.epam.news.database.ConnectionPool
+	 * @see by.epam.news.database.ConnectionPoolTest
 	 */
 	private ConnectionPool pool;
 

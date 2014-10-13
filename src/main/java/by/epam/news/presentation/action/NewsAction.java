@@ -1,6 +1,5 @@
 package by.epam.news.presentation.action;
 
-import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +52,11 @@ public class NewsAction extends MappingDispatchAction {
 	 */
 	public ActionForward create(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
+
+		if (isCancelled(request)) {
+			return getBackForward(request, mapping, Routes.LAST_PAGE, Routes.LAST_ID);
+		}
+
 		NewsForm news = (NewsForm) form;
 		int id = 0;
 		try {
@@ -66,6 +70,7 @@ public class NewsAction extends MappingDispatchAction {
 		redirect.addParameter(Routes.ID, id);
 		return redirect;
 	}
+
 
 	/**
 	 * View news.
@@ -111,7 +116,7 @@ public class NewsAction extends MappingDispatchAction {
 		String sId = request.getParameter(Routes.ID);
 		News news = null;
 		if (null == sId) {
-			news = new News(0, "", new Date(), "", "");
+			news = new News();
 		} else {
 			news = loadNewsById(sId);
 		}
@@ -166,7 +171,6 @@ public class NewsAction extends MappingDispatchAction {
 			service.deleteNews(newsForm.getNewsToDelete());
 		} catch (ServiceException e) {
 			Log.error(e.getMessage(), e);
-			request.setAttribute(Globals.ERROR_KEY, e);
 			return mapping.findForward(Routes.GLOBAL_ERROR);
 		}
 		return mapping.findForward(Routes.LIST_FORWARD);
@@ -188,18 +192,48 @@ public class NewsAction extends MappingDispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().setAttribute(Globals.LOCALE_KEY,
 				Locale.forLanguageTag(request.getParameter(Routes.LOCALE)));
-		return mapping.findForward(Routes.LIST_FORWARD);
+		return getBackForward(request, mapping, Routes.CURRENT_PAGE, Routes.CURRENT_ID);
 	}
 
 	/**
+	 * Get last page.
+	 * 
+	 * Invoke when on add page user press cancel or change locale. Get forwardName Attribute
+	 * from session and try find forward for this. Also look Routes.LAST_ID
+	 * Attribute and put it in request.
+	 * 
+	 * @param request
+	 * @param mapping
+	 * @param forwardName
+	 * @return
+	 */
+	
+	private ActionForward getBackForward(HttpServletRequest request,
+			ActionMapping mapping, String forwardName, String idName) {
+		Object lastPage = request.getSession().getAttribute(forwardName);
+		Object lastId = request.getSession().getAttribute(idName);
+		if (null != lastPage) {
+			ActionRedirect redirect = new ActionRedirect(
+					mapping.findForward((String) lastPage));
+			if (lastId != null && lastId.toString().length() != 0 && !"0".equals(lastId.toString())) {
+				redirect.addParameter(Routes.ID, lastId);
+			}
+			return redirect;
+		}
+		return mapping.findForward(Routes.LIST_FORWARD);
+	}
+
+	
+	/**
 	 * Load news by id.
 	 * 
-	 * Help method to load news by id (string).
-	 * If news can't be loaded return null. Be careful.
+	 * Help method to load news by id (string). If news can't be loaded return
+	 * null. Be careful.
+	 * 
 	 * @param strId
 	 * @return
 	 */
-	public News loadNewsById(String strId) {
+	private News loadNewsById(String strId) {
 		String ID_PATTERN = "[0-9]*";
 		if (strId.matches(ID_PATTERN)) {
 			try {

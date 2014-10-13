@@ -10,21 +10,24 @@
 	var nothingDelete = '<bean:message key="js.news.delete.nothing" /> ';
 </script>
 
+<c:set var="last" scope="session" value="list"/>
+<c:set var="current" scope="session" value="list"/>
+
 <div id="news-list">
 	<html:form action="DeleteNews">
 		<logic:iterate name="NewsForm" property="newsList" id="news">
 			<div class="news-list-single-news">
 				<div class="title-date">
 					<div class="title">
-						<b><bean:write name="news" property="title" /></b>
+					<pre><b><span class="inner-pre"><bean:write name="news" property="title" /></span></b></pre>
 					</div>
 					<div class="date">
-						<bean:write name="news" format="MM/dd/yyyy" property="date" />
+						<bean:write name="news" formatKey="news.date.format" property="date" />
 					</div>
 				</div>
 	
 				<div class="news-brief">
-					<bean:write name="news" property="brief" />
+					<pre><span class="inner-pre"><bean:write name="news" property="brief" /></span></pre>
 				</div>
 	
 				<div class="nav-checkbox">
