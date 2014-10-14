@@ -3,12 +3,12 @@ package by.epam.news.presentation.form;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.struts.action.ActionForm;
+import org.apache.struts.validator.ValidatorForm;
 
 import by.epam.news.model.News;
 
 @SuppressWarnings("serial")
-public class NewsForm extends ActionForm{
+public class NewsForm extends ValidatorForm{
 	
 	private News newsMessage;
 	private List<News> newsList;

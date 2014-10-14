@@ -1,4 +1,4 @@
-package by.epam.news.util;
+package by.epam.news.database;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

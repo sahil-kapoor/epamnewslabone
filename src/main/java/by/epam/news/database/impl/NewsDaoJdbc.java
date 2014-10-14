@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.epam.news.database.ConnectionPool;
-import by.epam.news.database.DaoUtil;
+import by.epam.news.database.JdbcUtil;
 import by.epam.news.database.DataBaseException;
 import by.epam.news.database.NewsDao;
 import by.epam.news.database.SqlScriptMaker;
@@ -61,7 +61,7 @@ public class NewsDaoJdbc implements NewsDao {
 			String generatedColumns[] = { RETURN_ID };
 			statement = connection
 					.prepareStatement(SqlScriptMaker.getAdd(),  generatedColumns);
-			DaoUtil.setOneNews(statement, news);
+			JdbcUtil.setOneNews(statement, news);
 			statement.executeUpdate();
 			result = statement.getGeneratedKeys();  	
 			result.next();  
@@ -70,8 +70,8 @@ public class NewsDaoJdbc implements NewsDao {
 		} catch (SQLException e) {
 			throw new DataBaseException("Can't execute sql when add news", e);
 		} finally {
-			DaoUtil.closeResultSet(result);		 
-			DaoUtil.closeStatementAndConnection(statement, connection, pool);
+			JdbcUtil.closeResultSet(result);		 
+			JdbcUtil.closeStatementAndConnection(statement, connection, pool);
 		}
 	}
 
@@ -95,13 +95,13 @@ public class NewsDaoJdbc implements NewsDao {
 			statement = connection.createStatement();	
 			result = statement.executeQuery(SqlScriptMaker.getLoadAll());
 			while (result.next()) {
-				newsList.add(DaoUtil.getOneNews(result));
+				newsList.add(JdbcUtil.getOneNews(result));
 			}
 		} catch (SQLException e) {
 			throw new DataBaseException("Can't execute sql when load all news", e);
 		} finally {
-			DaoUtil.closeResultSet(result);		
-			DaoUtil.closeStatementAndConnection(statement, connection, pool);
+			JdbcUtil.closeResultSet(result);		
+			JdbcUtil.closeStatementAndConnection(statement, connection, pool);
 		}
 		return newsList;
 	}
@@ -126,15 +126,15 @@ public class NewsDaoJdbc implements NewsDao {
 			result = statement.executeQuery(SqlScriptMaker.getLoadOne(id));
 			News news = null;
 			while (result.next()) {				
-				news = DaoUtil.getOneNews(result);
+				news = JdbcUtil.getOneNews(result);
 			}
 			result.close();
 			return news;
 		} catch (SQLException e) {
 			throw new DataBaseException("Can't execute sql when load all news", e);
 		} finally {
-			DaoUtil.closeResultSet(result);		
-			DaoUtil.closeStatementAndConnection(statement, connection, pool);
+			JdbcUtil.closeResultSet(result);		
+			JdbcUtil.closeStatementAndConnection(statement, connection, pool);
 		}
 	}
 
@@ -155,13 +155,13 @@ public class NewsDaoJdbc implements NewsDao {
 			connection = pool.getConnection();
 			statement = connection
 					.prepareStatement(SqlScriptMaker.getUpdate());		
-			DaoUtil.setOneNews(statement, news);
+			JdbcUtil.setOneNews(statement, news);
 			statement.setInt(5, news.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DataBaseException("Can't execute sql when edit news", e);
 		} finally {		
-			DaoUtil.closeStatementAndConnection(statement, connection, pool);
+			JdbcUtil.closeStatementAndConnection(statement, connection, pool);
 		}
 	}
 
@@ -187,7 +187,7 @@ public class NewsDaoJdbc implements NewsDao {
 			e.printStackTrace();
 			throw new DataBaseException("Can't execute sql when delete news", e);
 		} finally {
-			DaoUtil.closeStatementAndConnection(statement, connection, pool);
+			JdbcUtil.closeStatementAndConnection(statement, connection, pool);
 		}
 	}
 	

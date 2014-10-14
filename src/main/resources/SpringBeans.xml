@@ -31,7 +31,7 @@
 	</bean>
 
 	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl">
-		<property name="dao" ref="NewsDaoJpa" />
+		<property name="dao" ref="NewsDaoHibernate" />
 	</bean>
 
 	<bean name="/ListNews" class="by.epam.news.presentation.action.NewsAction">

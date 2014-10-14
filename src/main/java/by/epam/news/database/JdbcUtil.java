@@ -19,9 +19,9 @@ import by.epam.news.util.SystemLogger;
  * @author Alexander_Demeshko
  *
  */
-public final class DaoUtil {
+public final class JdbcUtil {
 
-	private DaoUtil(){
+	private JdbcUtil(){
 		
 	}
 	

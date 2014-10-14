@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<News ID="1"  TITLE="test title 1" NEWS_DATE="2014-11-11" BRIEF="test brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brieest brievf 1" CONTENT="CONTENT TEST"/>
+	<News ID="1" TITLE="test title 1" NEWS_DATE="2014-11-11" BRIEF="test brief 1"
+		CONTENT="CONTENT TEST 1" />
+	<News ID="2" TITLE="test title 2" NEWS_DATE="2114-11-11" BRIEF="test briees 2"
+		CONTENT="CONTENT TEST 2" />
+	<News ID="3" TITLE="test title 3" NEWS_DATE="2214-11-11" BRIEF="test briees 3"
+		CONTENT="CONTENT TEST 3" />
 </dataset>

@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:SpringBeansTest.xml" })
-public class TestConnectionPool {
+public class ConnectionPoolTest {
 
 	private ConnectionPool pool;
 	private final static int POOL_USERS = 100;

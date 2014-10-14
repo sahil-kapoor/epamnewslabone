@@ -38,7 +38,7 @@ public class NewsServiceImpl implements NewsService {
 				dao.editNews(news);
 			}
 		} catch (DataBaseException e) {
-			throw new ServiceException("Can't save news", e);
+			throw new ServiceException("Can't save news: " + e.getMessage(), e);
 		}
 		return id;
 	}
@@ -48,7 +48,7 @@ public class NewsServiceImpl implements NewsService {
 		try {
 			return dao.loadAllNews();
 		} catch (DataBaseException e) {
-			throw new ServiceException("Can't load  news list", e);
+			throw new ServiceException("Can't load  news list: " + e.getMessage(), e);
 		}
 	}
 
@@ -57,7 +57,7 @@ public class NewsServiceImpl implements NewsService {
 		try {
 			return dao.loadNews(id);
 		} catch (DataBaseException e) {
-			throw new ServiceException("Can't load single news", e);
+			throw new ServiceException("Can't load single news: " + e.getMessage(), e);
 		}
 	}
 
@@ -66,7 +66,7 @@ public class NewsServiceImpl implements NewsService {
 		try {
 			dao.deleteNews(ids);
 		} catch (DataBaseException e) {
-			throw new ServiceException("Can't delete news", e);
+			throw new ServiceException("Can't delete news :" + e.getMessage(), e);
 		}
 	}
 

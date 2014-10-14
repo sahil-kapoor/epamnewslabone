@@ -1,0 +1,45 @@
+<!DOCTYPE form-validation PUBLIC
+ "-//Apache Software Foundation
+//DTD Commons Validator Rules Configuration 1.3.0//EN"
+ "http://jakarta.apache.org/commons/dtds/validator_1_3_0.dtd">
+
+<form-validation>
+	<formset>
+		<form name="NewsForm">
+			<field property="newsMessage.title" depends="required, maxlength">
+				<msg name="required" key="error.form.validation.title.requre" />
+				<msg name="maxlength" key="error.form.validation.title.length" />
+				<arg name="maxlength" key="${var:maxlength}" position="0"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>100</var-value>
+				</var>
+			</field>
+			<field property="newsMessage.brief" depends="required, maxlength">
+				<msg name="required" key="error.form.validation.brief.requre" />
+				<msg name="maxlength" key="error.form.validation.brief.length" />
+				<arg name="maxlength" key="${var:maxlength}" position="0"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>500</var-value>
+				</var>
+			</field>
+			<field property="newsMessage.content" depends="required, maxlength">
+				<msg name="required" key="error.form.validation.content.requre" />
+				<msg name="maxlength" key="error.form.validation.content.length" />
+				<arg name="maxlength" key="${var:maxlength}" position="0"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>
+			
+			<field property="newsMessage.date" depends="required">
+				<msg name="required" key="error.form.validation.content.requre" />
+			</field>
+		</form>
+	</formset>
+</form-validation>

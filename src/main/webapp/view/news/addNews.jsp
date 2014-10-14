@@ -15,16 +15,22 @@
 	var cancel = '<bean:message key="js.news.cancel" />';
 	var lang = '<bean:message key="js.news.lang" />';
 </script>
-<c:set var="current" scope="session" value="add"/>
-<c:set var="currentId" scope="session" value="${NewsForm.newsMessage.id}"/>
+<c:set var="current" scope="session" value="add" />
+<c:set var="currentId" scope="session"
+	value="${NewsForm.newsMessage.id}" />
 
-<input type="hidden" id="hidden-locale" value="${pageContext.response.locale}" />
+<input type="hidden" id="hidden-locale"
+	value="${pageContext.response.locale}" />
 
 
 <div id="add-form">
+	<font color="red"> 
+		<html:errors property="newsMessage.title"/>
+		<html:errors property="newsMessage.date"/>
+		<html:errors property="newsMessage.brief"/>
+		<html:errors property="newsMessage.content"/>
+	</font>
 	<html:form action="CreateNews">
-		<html:errors />
-
 		<table>
 			<html:hidden name="NewsForm" property="newsMessage.id" />
 			<html:hidden property="last" value="${last}" />
@@ -60,8 +66,8 @@
 				<bean:message key="label.news.button.submit" />
 			</html:submit>
 			<html:cancel styleId="cancel-save-button">
- 				<bean:message key="label.news.button.cancel" />
- 			</html:cancel>
+				<bean:message key="label.news.button.cancel" />
+			</html:cancel>
 		</div>
 	</html:form>
 </div>

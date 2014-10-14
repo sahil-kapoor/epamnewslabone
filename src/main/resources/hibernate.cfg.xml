@@ -10,7 +10,6 @@
   <property name="hibernate.connection.password">wdv11lol</property>
   <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
   <property name="connection.pool_size">5</property>
-  <property name="show_sql">true</property>
   <mapping resource="by/epam/news/model/news.hbm.xml"></mapping>
 </session-factory>
 </hibernate-configuration>

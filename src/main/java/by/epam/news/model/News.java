@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -18,7 +19,8 @@ public class News implements Serializable {
 	private static final long serialVersionUID = 6566437990774525688L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="NEWS_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="id_generator")
+	@SequenceGenerator(name = "id_generator", sequenceName = "NEWS_SEQ")
 	private int id;
 	
 	private String title;
