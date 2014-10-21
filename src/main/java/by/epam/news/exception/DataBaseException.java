@@ -1,16 +1,15 @@
-package by.epam.news.service;
+package by.epam.news.exception;
 
-import by.epam.news.exception.NewsException;
 
-public class ServiceException extends NewsException{
+public class DataBaseException extends NewsException{
 
     private static final long serialVersionUID = 1L;
     private Exception hiddenException;
 
-    public ServiceException(String msg){
+    public DataBaseException(String msg){
         super(msg);
     }
-    public ServiceException(String msg, Exception e){
+    public DataBaseException(String msg, Exception e){
         super(msg);
         hiddenException = e;
     }

@@ -36,9 +36,11 @@
 					<var-value>2000</var-value>
 				</var>
 			</field>
-			
+
+
+
 			<field property="newsMessage.date" depends="required">
-				<msg name="required" key="error.form.validation.content.requre" />
+				<msg name="required" key="error.form.validation.date.requre" />
 			</field>
 		</form>
 	</formset>

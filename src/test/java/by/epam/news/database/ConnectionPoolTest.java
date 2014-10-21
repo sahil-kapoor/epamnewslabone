@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import by.epam.news.exception.DataBaseException;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:SpringBeansTest.xml" })

@@ -1,5 +1,6 @@
 package by.epam.news.presentation.action;
 
+
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +14,11 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.MappingDispatchAction;
 
+import by.epam.news.exception.ServiceException;
 import by.epam.news.model.News;
 import by.epam.news.presentation.Routes;
 import by.epam.news.presentation.form.NewsForm;
 import by.epam.news.service.NewsService;
-import by.epam.news.service.ServiceException;
 
 /**
  * News Action.
@@ -57,18 +58,16 @@ public class NewsAction extends MappingDispatchAction {
 			return getBackForward(request, mapping, Routes.LAST_PAGE, Routes.LAST_ID);
 		}
 
-		NewsForm news = (NewsForm) form;
+		NewsForm newsForm = (NewsForm) form;		
 		int id = 0;
 		try {
-			id = service.saveNews(news.getNewsMessage());
+			id = service.saveNews(newsForm.getNewsMessage());
 		} catch (ServiceException e) {
 			Log.error(e.getMessage(), e);
 			return mapping.findForward(Routes.GLOBAL_ERROR);
-		}
-		ActionRedirect redirect = new ActionRedirect(
-				mapping.findForward(Routes.VIEW_FORWARD));
-		redirect.addParameter(Routes.ID, id);
-		return redirect;
+		}		
+		newsForm.getNewsMessage().setId(id);
+		return mapping.findForward(Routes.VIEW_FORWARD);
 	}
 
 
@@ -86,15 +85,15 @@ public class NewsAction extends MappingDispatchAction {
 	 */
 	public ActionForward view(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		String sId = request.getParameter(Routes.ID);
+		NewsForm newsForm = (NewsForm) form;
+		int id = newsForm.getNewsMessage().getId();
 		News news = null;
-		if (null != sId) {
-			news = loadNewsById(sId);
+		if ( id != 0) {
+			news = loadNewsById(id+"");
 		}
 		if (null == news) {
 			return mapping.findForward(Routes.ERROR_404);
 		}
-		NewsForm newsForm = (NewsForm) form;
 		newsForm.setNewsMessage(news);
 		return mapping.findForward(Routes.VIEW_FORWARD);
 	}
@@ -113,19 +112,38 @@ public class NewsAction extends MappingDispatchAction {
 	 */
 	public ActionForward add(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		String sId = request.getParameter(Routes.ID);
+		NewsForm newsForm = (NewsForm) form;
+		newsForm.setNewsMessage(new News());
+		return mapping.findForward(Routes.ADD_FORWARD);
+	}
+	
+	/**
+	 * Show add or edit page.
+	 * 
+	 * Get news's id from request, if id == null show add page, if id illegal
+	 * show 404 error page. Otherwise show edit page for news with this id.
+	 * 
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ActionForward edit(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		NewsForm newsForm = (NewsForm) form;
+		int id = newsForm.getNewsMessage().getId();
 		News news = null;
-		if (null == sId) {
-			news = new News();
+		if (0 == id) {
+			return mapping.findForward(Routes.ERROR_404);
 		} else {
-			news = loadNewsById(sId);
+			news = loadNewsById(id+"");
 		}
 		if (null == news) {
 			return mapping.findForward(Routes.ERROR_404);
 		}
-		NewsForm newsForm = (NewsForm) form;
 		newsForm.setNewsMessage(news);
-		return mapping.findForward(Routes.ADD_FORWARD);
+		return mapping.findForward(Routes.EDIT_FORWARD);
 	}
 
 	/**
@@ -210,11 +228,11 @@ public class NewsAction extends MappingDispatchAction {
 	
 	private ActionForward getBackForward(HttpServletRequest request,
 			ActionMapping mapping, String forwardName, String idName) {
-		Object lastPage = request.getSession().getAttribute(forwardName);
+		Object page = request.getSession().getAttribute(forwardName);
 		Object lastId = request.getSession().getAttribute(idName);
-		if (null != lastPage) {
+		if (null != page) {
 			ActionRedirect redirect = new ActionRedirect(
-					mapping.findForward((String) lastPage));
+					mapping.findForward((String) page));
 			if (lastId != null && lastId.toString().length() != 0 && !"0".equals(lastId.toString())) {
 				redirect.addParameter(Routes.ID, lastId);
 			}
@@ -234,17 +252,12 @@ public class NewsAction extends MappingDispatchAction {
 	 * @return
 	 */
 	private News loadNewsById(String strId) {
-		String ID_PATTERN = "[0-9]*";
-		if (strId.matches(ID_PATTERN)) {
-			try {
-				int id = Integer.parseInt(strId);
-				return service.loadNews(id);
-			} catch (ServiceException | NumberFormatException e) {
-				Log.error(e.getMessage(), e);
-				return null;
-			}
+		try {
+			int id = Integer.parseInt(strId);
+			return service.loadNews(id);
+		} catch (ServiceException | NumberFormatException e) {
+			Log.error(e.getMessage(), e);
+			return null;
 		}
-		return null;
 	}
-
 }

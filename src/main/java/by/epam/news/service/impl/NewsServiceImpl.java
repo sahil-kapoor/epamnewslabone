@@ -2,11 +2,11 @@ package by.epam.news.service.impl;
 
 import java.util.List;
 
-import by.epam.news.database.DataBaseException;
-import by.epam.news.database.NewsDao;
+import by.epam.news.database.dao.NewsDaoI;
+import by.epam.news.exception.DataBaseException;
+import by.epam.news.exception.ServiceException;
 import by.epam.news.model.News;
 import by.epam.news.service.NewsService;
-import by.epam.news.service.ServiceException;
 
 /**
  * Implementation for NewsService.
@@ -16,9 +16,9 @@ import by.epam.news.service.ServiceException;
  */
 public class NewsServiceImpl implements NewsService {
 
-	private NewsDao dao;
+	private NewsDaoI dao;
 
-	public void setDao(NewsDao dao) {
+	public void setDao(NewsDaoI dao) {
 		this.dao = dao;
 	}
 

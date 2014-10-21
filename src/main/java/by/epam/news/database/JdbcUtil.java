@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import org.apache.commons.beanutils.ConvertUtils;
 
+import by.epam.news.exception.DataBaseException;
 import by.epam.news.model.News;
 import by.epam.news.util.SystemLogger;
 

@@ -8,7 +8,7 @@
 }
 
 #add-form th, #add-form  td {
-    padding: 5px;
+    padding: 5px 5px 5px 25px;
     text-align: left;    
 }
 
@@ -19,11 +19,16 @@
  }
  
 #submit-cancel-buttons{
- 	margin: 30px auto;
- 	width: 185px;
+	margin-top: 30px;
+ 	text-align: center;
+
  }
  
 #submit-cancel-buttons input{
  	padding: 3px;
  	font-size: 15px;
+ }
+ 
+ .error-message{
+ 	color: red;
  }

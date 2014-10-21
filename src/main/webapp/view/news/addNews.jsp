@@ -15,50 +15,67 @@
 	var cancel = '<bean:message key="js.news.cancel" />';
 	var lang = '<bean:message key="js.news.lang" />';
 </script>
-<c:set var="current" scope="session" value="add" />
-<c:set var="currentId" scope="session"
-	value="${NewsForm.newsMessage.id}" />
+
+
+<c:if test="${NewsForm.newsMessage.id == 0 }">
+	<c:set var="current" scope="session" value="add" />
+	<c:set var="currentId" scope="session" value="0" />
+</c:if>
+
+<c:if test="${NewsForm.newsMessage.id != 0 }">
+	<c:set var="current" scope="session" value="edit" />
+	<c:set var="currentId" scope="session" value="${NewsForm.newsMessage.id}" />
+</c:if>
+
 
 <input type="hidden" id="hidden-locale"
 	value="${pageContext.response.locale}" />
 
 
 <div id="add-form">
-	<font color="red"> 
-		<html:errors property="newsMessage.title"/>
-		<html:errors property="newsMessage.date"/>
-		<html:errors property="newsMessage.brief"/>
-		<html:errors property="newsMessage.content"/>
-	</font>
 	<html:form action="CreateNews">
 		<table>
 			<html:hidden name="NewsForm" property="newsMessage.id" />
 			<html:hidden property="last" value="${last}" />
 			<tr>
-				<td valign="top"><bean:message key="label.news.title" />:</td>
+				<td valign="top"><bean:message key="label.news.title" /></td>
 				<td><html:text maxlength="100" styleId="title-text"
 						name="NewsForm" property="newsMessage.title"></html:text></td>
-			</tr>
 
+			</tr>
 			<tr>
-				<td valign="top"><bean:message key="label.news.news_date" />:</td>
+				<td class="error-message"><html:errors
+						property="newsMessage.title" /></td>
+			</tr>
+			<tr>
+				<td valign="top"><bean:message key="label.news.news_date" /></td>
 				<td><input type="text" name="newsMessage.date" id="date-text"
 					maxlength="10"
 					value='<bean:write name="NewsForm" property="newsMessage.date" formatKey="news.date.format"/>'>
+				<input type="hidden" name="newsMessage.date" id="date-text-hidden">
 				</td>
-
 			</tr>
-
 			<tr>
-				<td valign="top"><bean:message key="label.news.brief" />:</td>
+				<td class="error-message"><html:errors
+						property="newsMessage.date" /></td>
+			</tr>
+			<tr>
+				<td valign="top"><bean:message key="label.news.brief" /></td>
 				<td><html:textarea styleId="brief-text" name="NewsForm"
 						property="newsMessage.brief" cols="65" rows="10"></html:textarea></td>
 			</tr>
-
 			<tr>
-				<td valign="top"><bean:message key="label.news.content" />:</td>
+				<td class="error-message"><html:errors
+						property="newsMessage.brief" /></td>
+			</tr>
+			<tr>
+				<td valign="top"><bean:message key="label.news.content" /></td>
 				<td><html:textarea styleId="content-text" name="NewsForm"
 						property="newsMessage.content" cols="65" rows="10"></html:textarea></td>
+			</tr>
+			<tr>
+				<td class="error-message"><html:errors
+						property="newsMessage.content" /></td>
 			</tr>
 		</table>
 		<div id="submit-cancel-buttons">

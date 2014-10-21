@@ -1,4 +1,4 @@
-package by.epam.news.database.impl;
+package by.epam.news.database.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +10,8 @@ import java.util.List;
 
 import by.epam.news.database.ConnectionPool;
 import by.epam.news.database.JdbcUtil;
-import by.epam.news.database.DataBaseException;
-import by.epam.news.database.NewsDao;
 import by.epam.news.database.SqlScriptMaker;
+import by.epam.news.exception.DataBaseException;
 import by.epam.news.model.News;
 
 /**
@@ -23,7 +22,7 @@ import by.epam.news.model.News;
  * @author Alexander_Demeshko
  *
  */
-public class NewsDaoJdbc implements NewsDao {
+public class NewsDaoJdbc implements NewsDaoI {
  
 	/**
 	 * Connection pool
@@ -168,7 +167,7 @@ public class NewsDaoJdbc implements NewsDao {
 	/**
 	 * Delete News
 	 *
-	 * @param int[]
+	 * @param Integer[]
 	 * @throws DataBaseException 
 	 * 
 	 * Delete news using int array of news's id.

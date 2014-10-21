@@ -19,7 +19,7 @@ function checkCheckBox(){
 function deletedeletebutton(){
  	var checks = document.getElementsByClassName("check-box");
 	if(checks.length == 0){
-		document.getElementById('delete-all-button').remove();
+		document.getElementById('delete-all-button').style.display = "none";
 	}
 }
 

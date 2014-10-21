@@ -44,9 +44,10 @@ public class DateConvert implements Converter {
 			try {
 				return new SimpleDateFormat(pattern).parse((String) value);
 			} catch (ParseException pe) {
+				
 				SystemLogger.getLogger().error(
-						"invalid date detected, returned current date", pe);
-				return new Date();
+						"invalid date detected, returned null", pe);
+				return null;
 			}
 		}
 

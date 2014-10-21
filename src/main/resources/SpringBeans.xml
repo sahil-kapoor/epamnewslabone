@@ -1,7 +1,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -11,16 +13,21 @@
 		</property>
 	</bean>
 
-	<bean id="NewsDaoJdbc" class="by.epam.news.database.impl.NewsDaoJdbc">
+
+	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl">
+		<property name="dao" ref="NewsDaoJdbc" />
+	</bean>
+
+	<bean id="NewsDaoJdbc" class="by.epam.news.database.dao.NewsDaoJdbc">
 		<constructor-arg type="by.epam.news.database.ConnectionPool"
 			ref="connectionPool" />
 	</bean>
-	
-	<bean id="NewsDaoHibernate" class="by.epam.news.database.impl.NewsDaoHibernate">
-	</bean>
-	
-	<bean id="NewsDaoJpa" class="by.epam.news.database.impl.NewsDaoJpa">
-	</bean>
+
+<!-- 	<bean id="NewsDaoHibernate" class="by.epam.news.database.dao.NewsDaoHibernate"> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="NewsDaoJpa" class="by.epam.news.database.dao.NewsDaoJpa"> -->
+<!-- 	</bean> -->
 
 	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool"
 		destroy-method="destroy">
@@ -28,10 +35,7 @@
 		<constructor-arg type="java.lang.String" value="${jdbc.url}" />
 		<constructor-arg type="java.lang.String" value="${jdbc.user}" />
 		<constructor-arg type="java.lang.String" value="${jdbc.password}" />
-	</bean>
-
-	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl">
-		<property name="dao" ref="NewsDaoHibernate" />
+		<constructor-arg type="java.lang.Integer" value="${jdbc.size}" />
 	</bean>
 
 	<bean name="/ListNews" class="by.epam.news.presentation.action.NewsAction">
@@ -39,6 +43,10 @@
 	</bean>
 
 	<bean name="/AddNews" class="by.epam.news.presentation.action.NewsAction">
+		<property name="service" ref="NewsService" />
+	</bean>
+	
+	<bean name="/EditNews" class="by.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
 
@@ -58,5 +66,40 @@
 		<property name="service" ref="NewsService" />
 	</bean>
 
+	
+<!-- 	<bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> -->
+<!--         <property name="driverClass" value="${jdbc.driver}" /> -->
+<!--         <property name="jdbcUrl" value="${jdbc.url}" /> -->
+<!--         <property name="user" value="${jdbc.user}" /> -->
+<!--         <property name="password" value="${jdbc.password}" />  -->
+<!--         <property name="minPoolSize" value="1" /> -->
+<!--         <property name="maxPoolSize" value="10" /> -->
+<!--  	</bean> -->
+
+<!-- 	<bean id="emf" -->
+<!-- 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> -->
+<!-- 		<property name="packagesToScan" value="com.epam.news.model" /> -->
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+<!-- 		<property name="jpaVendorAdapter"> -->
+<!-- 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="jpaProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="hibernate.hbm2ddl.auto">update</prop> -->
+<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager"> -->
+<!-- 		<property name="entityManagerFactory" ref="emf" /> -->
+<!-- 	</bean> -->
+	
+<!-- 	<tx:annotation-driven transaction-manager="txManager" /> -->
+
+<!-- 	<bean id="persistenceExceptionTranslationPostProcessor" -->
+<!-- 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" /> -->
+<!-- 	<bean -->
+<!-- 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" /> -->
 </beans>
 

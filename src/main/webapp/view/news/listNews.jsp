@@ -19,7 +19,7 @@
 			<div class="news-list-single-news">
 				<div class="title-date">
 					<div class="title">
-					<pre><b><span class="inner-pre"><bean:write name="news" property="title" /></span></b></pre>
+					<b><span class="inner-pre"><bean:write name="news" property="title" /></span></b>
 					</div>
 					<div class="date">
 						<bean:write name="news" formatKey="news.date.format" property="date" />
@@ -27,13 +27,14 @@
 				</div>
 	
 				<div class="news-brief">
-					<pre><span class="inner-pre"><bean:write name="news" property="brief" /></span></pre>
+					<span class="inner-pre"><bean:write name="news" property="brief" /></span>
 				</div>
 	
 				<div class="nav-checkbox">
-					<html:link forward="NewsView" paramId="id" paramName="news"
+					<html:link forward="NewsView" paramId="newsMessage.id" paramName="news"
 						paramProperty="id"><bean:message key="link.news.link.view" /></html:link>
-					<html:link action="AddNews.do?id=${news.id}"><bean:message key="link.news.link.edit" /></html:link>
+						<html:link forward="EditNews" paramId="newsMessage.id" paramName="news"
+						paramProperty="id"><bean:message key="link.news.link.edit" /></html:link>					
 					<html:multibox styleClass="check-box" property="newsToDelete" value="${news.id}"/>
 				</div>
 			</div>

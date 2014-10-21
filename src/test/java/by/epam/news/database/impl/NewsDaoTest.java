@@ -15,8 +15,8 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import by.epam.news.database.DataBaseException;
-import by.epam.news.database.NewsDao;
+import by.epam.news.database.dao.NewsDaoI;
+import by.epam.news.exception.DataBaseException;
 import by.epam.news.model.News;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
@@ -36,8 +36,8 @@ public class NewsDaoTest {
 	
 	
 	@Autowired
-	@Qualifier("NewsDaoJpa")
-	private NewsDao dao;
+	@Qualifier("NewsDaoHibernate")
+	private NewsDaoI dao;
 	
 	@SuppressWarnings("deprecation")
 	@Test
@@ -89,8 +89,7 @@ public class NewsDaoTest {
 	}
 	
 
-	
-	
+
 	
 	
 }

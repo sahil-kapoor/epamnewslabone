@@ -20,6 +20,7 @@
 		<forward name="ListNews" path="/ListNews.do" />
 		<forward name="ViewNews" path="/ViewNews.do" />
 		<forward name="AddNews" path="/AddNews.do" />
+		<forward name="EditNews" path="/EditNews.do" />
 		<forward name="CreateNews" path="/CreateNews.do" />
 		<forward name="DeleteNews" path="/DeleteNews.do" />
 	</global-forwards>
@@ -35,15 +36,23 @@
 
 		<action path="/AddNews"
 			type="org.springframework.web.struts.DelegatingActionProxy"
-			parameter="add" scope="request" name="NewsForm" validate="false">
+			parameter="add" scope="session" name="NewsForm" validate="false">
 			<forward name="add" path="addNewsPage" redirect="false" />
+			<forward name="error404" path="/view/error/error404.jsp"
+				redirect="false" />
+		</action>
+		
+		<action path="/EditNews"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			parameter="edit" scope="session" name="NewsForm" validate="false">
+			<forward name="edit" path="addNewsPage" redirect="false" />
 			<forward name="error404" path="/view/error/error404.jsp"
 				redirect="false" />
 		</action>
 
 		<action path="/NewsView"
 			type="org.springframework.web.struts.DelegatingActionProxy"
-			parameter="view" scope="request" name="NewsForm" validate="false"
+			parameter="view" scope="session" name="NewsForm" validate="false"
 			>
 			<forward name="view" path="showNewsPage" redirect="false" />
 			<forward name="error404" path="/view/error/error404.jsp"
@@ -52,7 +61,7 @@
 
 		<action path="/CreateNews"
 			type="org.springframework.web.struts.DelegatingActionProxy"
-			parameter="create" cancellable="true" validate="true" scope="request" name="NewsForm"
+			parameter="create" cancellable="true" validate="true" scope="session" name="NewsForm"
 			input="addNewsPage">
 			<forward name="list" path="/ListNews.do" redirect="true" />
 			<forward name="view" path="/NewsView.do" redirect="true" />
@@ -72,6 +81,7 @@
 			parameter="locale" name="NewsForm" validate="false" >
 			<forward name="list" path="/ListNews.do" redirect="true" />
 			<forward name="add" path="/AddNews.do" redirect="true" />
+			<forward name="edit" path="/EditNews.do" redirect="true" />
 			<forward name="view" path="/NewsView.do" redirect="true" />
 		</action>
 

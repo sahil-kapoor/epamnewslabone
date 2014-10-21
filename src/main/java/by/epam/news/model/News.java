@@ -3,6 +3,7 @@ package by.epam.news.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,11 +22,15 @@ public class News implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="id_generator")
 	@SequenceGenerator(name = "id_generator", sequenceName = "NEWS_SEQ")
+	@Column(name = "ID")
 	private int id;
-	
+	@Column(name = "TITLE")
 	private String title;
+	@Column(name="NEWS_DATE")
 	private Date date;
+	@Column(name = "BRIEF")
 	private String brief;
+	@Column(name = "CONTENT")
 	private String content;
 	
 	public News(int id, String title, Date date, String brief, String content) {

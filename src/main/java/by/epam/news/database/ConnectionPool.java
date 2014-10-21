@@ -3,9 +3,12 @@ package by.epam.news.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import by.epam.news.exception.DataBaseException;
 import by.epam.news.util.SystemLogger;
 
 /**
@@ -26,16 +29,9 @@ public class ConnectionPool {
 	/**
 	 * Busy connection.
 	 * 
-	 * Using to store busy connection.
+	 * Using to store all connection.
 	 */
-	private BlockingQueue<Connection> busyConnection;
-
-	/**
-	 * Max connection count.
-	 * 
-	 * Connection pool take this count of connections from jdbc driver.
-	 */
-	private final static int MAX_CONNECTION_COUNT = 5;
+	private List<Connection> allConnection;
 
 	/**
 	 * After creating pool get MAX_CONNECTION_COUNT connections from jdbc and
@@ -48,12 +44,12 @@ public class ConnectionPool {
 	 * @throws DataBaseException
 	 */
 	public ConnectionPool(String driver, String url, String user,
-			String password) throws DataBaseException {
-		freeConnection = new ArrayBlockingQueue<>(MAX_CONNECTION_COUNT);
-		busyConnection = new ArrayBlockingQueue<>(MAX_CONNECTION_COUNT);
+			String password, Integer maxConnectionCount) throws DataBaseException {
+		freeConnection = new ArrayBlockingQueue<>(maxConnectionCount);
+		allConnection = new ArrayList<>(maxConnectionCount);
 		try {
 			Class.forName(driver);
-			for (int i = 0; i < MAX_CONNECTION_COUNT; i++) {
+			for (int i = 0; i < maxConnectionCount; i++) {
 				Connection connection = DriverManager.getConnection(url, user,
 						password);
 				freeConnection.add(connection);
@@ -80,7 +76,6 @@ public class ConnectionPool {
 		Connection connection;
 		try {
 			connection = freeConnection.take();
-			busyConnection.put(connection);
 		} catch (InterruptedException e) {
 			throw new DataBaseException("Cant take pool connection", e);
 		}
@@ -91,7 +86,8 @@ public class ConnectionPool {
 	 * Return connection.
 	 * 
 	 * Return connection back to pool. Throws DataBaseException if connection is
-	 * null, closed, getting not from this pool or connection cannot be checked for closable(SQLException)
+	 * null, closed, getting not from this pool or connection cannot be checked
+	 * for closable(SQLException)
 	 * 
 	 * @param connection
 	 * @throws DataBaseException
@@ -112,30 +108,18 @@ public class ConnectionPool {
 			SystemLogger.getLogger().error(
 					"Error when try check closeble connection in pool", e);
 		}
-
-		if (busyConnection.contains(connection)) {
-			try {
-				freeConnection.put(connection);
-			} catch (InterruptedException e) {
-				throw new DataBaseException("Can't put pool connection back", e);
-			}
-			busyConnection.remove(connection);
-		} else {
-			throw new DataBaseException("Try return not pool connection");
-		}
+		freeConnection.add(connection);
 	}
 
 	/**
 	 * Destroy.
 	 * 
-	 * Close all connection from from free and busy queues.
+	 * Close all connection.
+	 * 
 	 * @throws SQLException
 	 */
 	public void destroy() throws SQLException {
-		for (Connection connection : freeConnection) {
-			connection.close();
-		}
-		for (Connection connection : busyConnection) {
+		for (Connection connection : allConnection) {
 			connection.close();
 		}
 	}

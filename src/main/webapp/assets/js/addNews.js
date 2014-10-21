@@ -32,45 +32,52 @@ function validate(){
 	var brief = document.getElementById('brief-text');
 	var content = document.getElementById('content-text');
 	var date = document.getElementById('date-text');
-	return checkTitle(title)&&checkBrief(brief)&&checkContent(content)&&checkDate(date);
+	var message = checkTitle(title);
+	message += checkBrief(brief);
+	message += checkContent(content);
+	message += checkDate(date);
+	if (message.length > 0){
+		alert(message)	
+		return false;
+	} else {
+		quickDate(date)
+		return true;
+	}
 }
 
 function checkContent(content) {
 	var text = content.value;
 	if (text == ""){
-		alert(invalidContent);
-		return false;
+		return "\n" + invalidContent;
 	} else {
 		if(text.length > 2000){
-			return false;
+			return "\n" + invalidContent;
 		}
-		return true;
+		return "";
 	}
 }
 
 function checkBrief(brief) {
 	var text = brief.value;
 	if (text == ""){
-		alert(invalidBrief);
-		return false;
+		return "\n" + invalidBrief;
 	} else {
 		if(text.length > 500){
-			return false;
+			return "\n" + invalidBrief;
 		}
-		return true;
+		return "";
 	}
 }
 
 function checkTitle(title) {
 	var text = title.value;
 	if (text == ""){
-		alert(invalidTitle);
-		return false;
+		return "\n" + invalidTitle;
 	} else {
 		if(text.length > 100){
-			return false;
+			return "\n" + invalidTitle;
 		}
-		return true;
+		return "";
 	}
 }
 
@@ -78,8 +85,7 @@ function checkDate(date) {
 	var text = date.value;
 	var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
     if (matches == null){
-	    alert(invalidDate);
-	    return false;
+	    return "\n" + invalidDate;
     }  
     var d, m, y;
     if( lang == "ru"){
@@ -96,60 +102,33 @@ function checkDate(date) {
     if (composedDate.getDate() == d &&
 	        composedDate.getMonth() == m &&
 	        composedDate.getFullYear() == y){
-    	m = m +1;
-    	date.value = m+"/"+d+"/"+y;
-    	return true;
-    }
-    alert(imposibleDate);
-	return false;
+    	return "";
+    } else {
+    	
+    	return "\n" + imposibleDate
+	}
 }
 
-
-
-function checkRusDate(date){
+function quickDate(date){
 	var text = date.value;
 	var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
     if (matches == null){
-	    alert(invalidDate);
-	    return false;
+	    return invalidDate;
+    }  
+    var d, m, y;
+    if( lang == "ru"){
+    	 d = matches[1];
+    	 m = matches[2] - 1;
+    	 y = matches[3];
     }
-    var d = matches[1] - 1;
-    var m = matches[2];
-    var y = matches[3];
-    var composedDate = new Date(y, m, d);
-    if (composedDate.getDate() == d &&
-	        composedDate.getMonth() == m &&
-	        composedDate.getFullYear() == y){
-    	return true;
+    if( lang == "en"){
+    	d = matches[2];
+        m = matches[1] - 1;
+        y = matches[3];
     }
-    alert(imposibleDate);
-	return false;
+	var date2 = document.getElementById('date-text');
+	var hidden = document.getElementById('date-text-hidden');
+	hidden.value = m+1+"/"+d+"/"+y;
+	date2.removeAttribute("name");
 }
 
-
-function checkEngDate(date){
-	var text = date.value;
-	var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(text);
-    if (matches == null){
-	    alert(invalidDate);
-	    return false;
-    }
-    var d = matches[2];
-    var m = matches[1] - 1;
-    var y = matches[3];
-    var composedDate = new Date(y, m, d);
-    if (composedDate.getDate() == d &&
-	        composedDate.getMonth() == m &&
-	        composedDate.getFullYear() == y){
-    	return true;
-    }
-    alert(imposibleDate);
-	return false;
-}
-
-function getRusDate(matches) {
-	var d = matches[1] - 1;
-    var m = matches[2] - 1;
-    var y = matches[3];
-    var composedDate = new Date(y, m, d);	
-}
