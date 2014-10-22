@@ -39,7 +39,7 @@
 			<html:hidden property="last" value="${last}" />
 			<tr>
 				<td valign="top"><bean:message key="label.news.title" /></td>
-				<td><html:text maxlength="100" styleId="title-text"
+				<td><html:text styleClass="title-input" maxlength="100" styleId="title-text"
 						name="NewsForm" property="newsMessage.title"></html:text></td>
 
 			</tr>

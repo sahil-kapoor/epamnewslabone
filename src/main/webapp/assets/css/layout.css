@@ -26,7 +26,7 @@ body {
 	border: 1px solid gray;
 	margin: 0px 5px 0px 27%;
 	width: 72%;
-	min-height: 78%;
+	min-height: 650px;
 	height: auto !important;
 	height: 80%;
 }

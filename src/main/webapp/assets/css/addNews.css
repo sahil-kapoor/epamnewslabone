@@ -7,6 +7,10 @@
 	
 }
 
+.title-input{
+	width: 96%;
+}
+
 #add-form th, #add-form  td {
     padding: 5px 5px 5px 25px;
     text-align: left;    

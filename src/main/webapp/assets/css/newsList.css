@@ -3,8 +3,8 @@
 }
 
 #news-list .title {
-	width: 70%;
-	margin-right: 75px;
+	width: 77%;
+	margin-right: 45px;
 	float: left;
 	word-break: break-all;
 }
@@ -30,7 +30,7 @@ b {
 #news-list .news-brief {
 	margin-top: 15px;
 	word-wrap: break-word;
-	width: 70%;
+	width: 68%;
 }
 
 #news-list .nav-checkbox {
