@@ -25,12 +25,13 @@
 #submit-cancel-buttons{
 	margin-top: 30px;
  	text-align: center;
-
+	
  }
  
 #submit-cancel-buttons input{
  	padding: 3px;
  	font-size: 15px;
+ 	min-width: 75px;
  }
  
  .error-message{

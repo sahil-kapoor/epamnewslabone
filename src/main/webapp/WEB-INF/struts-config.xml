@@ -7,7 +7,7 @@
 <struts-config>
 
 	<form-beans>
-		<form-bean name="NewsForm" type="by.epam.news.presentation.form.NewsForm" />
+		<form-bean name="NewsForm" type="com.epam.news.presentation.form.NewsForm" />
 	</form-beans>
 
 	<global-exceptions>
@@ -90,7 +90,7 @@
 	<controller
 		processorClass="org.springframework.web.struts.DelegatingTilesRequestProcessor" />
 
-	<message-resources parameter="by.epam.news.properties.news.News" />
+	<message-resources parameter="com.epam.news.properties.news.News" />
 
 
 	<plug-in className="org.apache.struts.tiles.TilesPlugin">

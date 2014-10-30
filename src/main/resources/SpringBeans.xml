@@ -8,28 +8,28 @@
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
-			<value>classpath:by/epam/news/properties/database/connectionPool.properties
+			<value>classpath:com/epam/news/properties/database/connectionPool.properties
 			</value>
 		</property>
 	</bean>
 
 
-	<bean id="NewsService" class="by.epam.news.service.impl.NewsServiceImpl">
+	<bean id="NewsService" class="com.epam.news.service.impl.NewsServiceImpl">
 		<property name="dao" ref="NewsDaoJdbc" />
 	</bean>
 
-	<bean id="NewsDaoJdbc" class="by.epam.news.database.dao.NewsDaoJdbc">
-		<constructor-arg type="by.epam.news.database.ConnectionPool"
+	<bean id="NewsDaoJdbc" class="com.epam.news.database.dao.NewsDaoJdbc">
+		<constructor-arg type="com.epam.news.database.util.ConnectionPool"
 			ref="connectionPool" />
 	</bean>
 
-<!-- 	<bean id="NewsDaoHibernate" class="by.epam.news.database.dao.NewsDaoHibernate"> -->
-<!-- 	</bean> -->
+	<bean id="NewsDaoHibernate" class="com.epam.news.database.dao.NewsDaoHibernate">
+	</bean>
 
-<!-- 	<bean id="NewsDaoJpa" class="by.epam.news.database.dao.NewsDaoJpa"> -->
-<!-- 	</bean> -->
+	<bean id="NewsDaoJpa" class="com.epam.news.database.dao.NewsDaoJpa">
+	</bean>
 
-	<bean id="connectionPool" class="by.epam.news.database.ConnectionPool"
+	<bean id="connectionPool" class="com.epam.news.database.util.ConnectionPool"
 		destroy-method="destroy">
 		<constructor-arg type="java.lang.String" value="${jdbc.driver}" />
 		<constructor-arg type="java.lang.String" value="${jdbc.url}" />
@@ -38,68 +38,68 @@
 		<constructor-arg type="java.lang.Integer" value="${jdbc.size}" />
 	</bean>
 
-	<bean name="/ListNews" class="by.epam.news.presentation.action.NewsAction">
+	<bean name="/ListNews" class="com.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
 
-	<bean name="/AddNews" class="by.epam.news.presentation.action.NewsAction">
+	<bean name="/AddNews" class="com.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
 	
-	<bean name="/EditNews" class="by.epam.news.presentation.action.NewsAction">
+	<bean name="/EditNews" class="com.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
 
-	<bean name="/NewsView" class="by.epam.news.presentation.action.NewsAction">
+	<bean name="/NewsView" class="com.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
 
-	<bean name="/CreateNews" class="by.epam.news.presentation.action.NewsAction">
+	<bean name="/CreateNews" class="com.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
 
-	<bean name="/DeleteNews" class="by.epam.news.presentation.action.NewsAction">
+	<bean name="/DeleteNews" class="com.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
 
-	<bean name="/Locale" class="by.epam.news.presentation.action.NewsAction">
+	<bean name="/Locale" class="com.epam.news.presentation.action.NewsAction">
 		<property name="service" ref="NewsService" />
 	</bean>
 
 	
-<!-- 	<bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> -->
-<!--         <property name="driverClass" value="${jdbc.driver}" /> -->
-<!--         <property name="jdbcUrl" value="${jdbc.url}" /> -->
-<!--         <property name="user" value="${jdbc.user}" /> -->
-<!--         <property name="password" value="${jdbc.password}" />  -->
-<!--         <property name="minPoolSize" value="1" /> -->
-<!--         <property name="maxPoolSize" value="10" /> -->
-<!--  	</bean> -->
+	<bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}" />
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <property name="user" value="${jdbc.user}" />
+        <property name="password" value="${jdbc.password}" /> 
+        <property name="minPoolSize" value="1" />
+        <property name="maxPoolSize" value="10" />
+ 	</bean>
 
-<!-- 	<bean id="emf" -->
-<!-- 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> -->
-<!-- 		<property name="packagesToScan" value="com.epam.news.model" /> -->
-<!-- 		<property name="dataSource" ref="dataSource" /> -->
-<!-- 		<property name="jpaVendorAdapter"> -->
-<!-- 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" /> -->
-<!-- 		</property> -->
-<!-- 		<property name="jpaProperties"> -->
-<!-- 			<props> -->
-<!-- 				<prop key="hibernate.hbm2ddl.auto">update</prop> -->
-<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> -->
-<!-- 			</props> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="packagesToScan" value="com.epam.news.model" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+			</props>
+		</property>
+	</bean>
 
-<!-- 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager"> -->
-<!-- 		<property name="entityManagerFactory" ref="emf" /> -->
-<!-- 	</bean> -->
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
 	
-<!-- 	<tx:annotation-driven transaction-manager="txManager" /> -->
+	<tx:annotation-driven transaction-manager="txManager" />
 
-<!-- 	<bean id="persistenceExceptionTranslationPostProcessor" -->
-<!-- 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" /> -->
-<!-- 	<bean -->
-<!-- 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" /> -->
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 </beans>
 
