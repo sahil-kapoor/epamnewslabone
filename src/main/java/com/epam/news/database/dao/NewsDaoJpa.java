@@ -14,7 +14,7 @@ import com.epam.news.database.util.SqlScriptMaker;
 import com.epam.news.exception.DataBaseException;
 import com.epam.news.model.News;
 
-public class NewsDaoJpa implements NewsDaoI {
+public final class NewsDaoJpa implements NewsDaoI {
 
 
 	@PersistenceContext

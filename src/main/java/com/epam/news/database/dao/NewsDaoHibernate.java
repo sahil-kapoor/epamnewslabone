@@ -22,11 +22,13 @@ import com.epam.news.exception.DataBaseException;
  * @author Alexander_Demeshko
  *
  */
-public class NewsDaoHibernate implements NewsDaoI {
+public final class NewsDaoHibernate implements NewsDaoI {
 	
 	private final static String QUERY_NAME = "deleteNews";
 	private final static String DELETE_IDS_PARAMETR = "deleteIds";
 	private final static String ORDER = "date";
+	
+	
 
 	/**
 	 * Add news.
@@ -39,7 +41,7 @@ public class NewsDaoHibernate implements NewsDaoI {
 	 */
 	@Override
 	public int addNews(News news) throws DataBaseException {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -51,8 +53,6 @@ public class NewsDaoHibernate implements NewsDaoI {
 			}
 			throw new DataBaseException("Cant save news: " + he.getMessage(),
 					he);
-		} finally {
-			session.close();
 		}
 		return news.getId();
 	}
@@ -73,7 +73,7 @@ public class NewsDaoHibernate implements NewsDaoI {
 
 		List<News> list = new ArrayList<News>();
 		Transaction tx = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			tx = session.beginTransaction();
 			Criteria criteria = session.createCriteria(News.class);
@@ -83,9 +83,7 @@ public class NewsDaoHibernate implements NewsDaoI {
 		} catch (HibernateException he) {
 			throw new DataBaseException("Cant load news list: " + he.getMessage(),
 					he);
-		} finally {
-			session.close();
-		}
+		} 
 		return list;
 	}
 
@@ -99,7 +97,7 @@ public class NewsDaoHibernate implements NewsDaoI {
 	 */
 	@Override
 	public News loadNews(int id) throws DataBaseException {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		News news = new News();
 		try {			
@@ -109,9 +107,7 @@ public class NewsDaoHibernate implements NewsDaoI {
 		} catch (HibernateException he) {
 			throw new DataBaseException("Cant load single news: " + he.getMessage(),
 					he);
-		} finally {
-			session.close();
-		}
+		} 
 		return news;
 	}
 
@@ -124,7 +120,7 @@ public class NewsDaoHibernate implements NewsDaoI {
 	 */
 	@Override
 	public void editNews(News news) throws DataBaseException {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -136,9 +132,7 @@ public class NewsDaoHibernate implements NewsDaoI {
 			}
 			throw new DataBaseException("Cant save news: " + he.getMessage(),
 					he);
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	/**
@@ -154,7 +148,7 @@ public class NewsDaoHibernate implements NewsDaoI {
 	public void deleteNews(Integer[] ids) throws DataBaseException {
 	
 		Transaction tx = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			tx = session.beginTransaction();
 			Query query = session.getNamedQuery(QUERY_NAME).setParameterList(
@@ -167,8 +161,6 @@ public class NewsDaoHibernate implements NewsDaoI {
 			}
 			throw new DataBaseException("Cant delete news: " + he.getMessage(),
 					he);
-		} finally {
-			session.close();
 		}
 	}
 

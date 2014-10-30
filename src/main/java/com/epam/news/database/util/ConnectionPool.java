@@ -17,7 +17,7 @@ import com.epam.news.util.SystemLogger;
  * @author Alexander_Demeshko
  *
  */
-public class ConnectionPool {
+public final class ConnectionPool {
 
 	/**
 	 * Free connection.

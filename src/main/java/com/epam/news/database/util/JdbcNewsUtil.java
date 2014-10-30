@@ -20,9 +20,9 @@ import com.epam.news.util.SystemLogger;
  * @author Alexander_Demeshko
  *
  */
-public final class JdbcUtil {
+public final class JdbcNewsUtil {
 
-	private JdbcUtil(){
+	private JdbcNewsUtil(){
 		
 	}
 	

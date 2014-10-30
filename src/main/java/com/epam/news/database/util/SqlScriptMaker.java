@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
  * @author Alexander_Demeshko
  *
  */
-public class SqlScriptMaker {
+public final class SqlScriptMaker {
 	
 	
 	private static final String LOAD_ALL = "loadAll";
@@ -21,6 +21,10 @@ public class SqlScriptMaker {
 	
 	private static ResourceBundle bundle = ResourceBundle.getBundle("com.epam.news.properties.database.SqlScripts");
 	
+	
+	private SqlScriptMaker(){
+		
+	}
 	
 	
 	public static String getLoadAll(){

@@ -5,10 +5,8 @@
 <link rel="stylesheet" type="text/css" href="assets/css/newsList.css">
 <script type="text/javascript" src="assets/js/list.js"></script>
 
-<script type="text/javascript">
-	var confirmDelete = '<bean:message key="js.news.delete.all" />';
-	var nothingDelete = '<bean:message key="js.news.delete.nothing" /> ';
-</script>
+
+<script type="text/javascript" src="assets/js/messages/listMessages.jsp"></script>
 
 <c:set var="last" scope="session" value="list"/>
 <c:set var="current" scope="session" value="list"/>

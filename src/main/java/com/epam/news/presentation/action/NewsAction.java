@@ -28,7 +28,7 @@ import com.epam.news.service.NewsService;
  * @author Alexander_Demeshko
  *
  */
-public class NewsAction extends MappingDispatchAction {
+public final class NewsAction extends MappingDispatchAction {
 
 	private NewsService service;
 

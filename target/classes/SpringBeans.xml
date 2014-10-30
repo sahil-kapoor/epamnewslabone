@@ -26,7 +26,7 @@
 	<bean id="NewsDaoHibernate" class="com.epam.news.database.dao.NewsDaoHibernate">
 	</bean>
 
-	<bean id="NewsDaoJpa" class="com.epam.news.database.dao.NewsDaoJpa">
+	<bean id="NewsDaoJpa" class="com.epam.news.database.dao.NewsDaoHibernate">
 	</bean>
 
 	<bean id="connectionPool" class="com.epam.news.database.util.ConnectionPool"

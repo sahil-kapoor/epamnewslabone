@@ -14,7 +14,7 @@ import com.epam.news.util.DateConvert;
  * @author Alexander_Demeshko
  *
  */
-public class NewsContextListener implements ServletContextListener {
+public final class NewsContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {

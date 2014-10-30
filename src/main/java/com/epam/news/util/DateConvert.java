@@ -18,12 +18,13 @@ import org.apache.commons.beanutils.Converter;
  * @author Alexander_Demeshko
  *
  */
-public class DateConvert implements Converter {
+public final class DateConvert implements Converter {
 
 	private static ResourceBundle bundle = ResourceBundle
 			.getBundle("com.epam.news.properties.news.News");
 	
 	private final static String pattern = bundle.getString("news.date.format");
+	
 
 	@Override
 	public Object convert(@SuppressWarnings("rawtypes") Class type, Object value) {

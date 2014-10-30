@@ -13,7 +13,7 @@ import java.io.IOException;
  * @author Alexander_Demeshko
  *
  */
-public class EncodingFilter implements Filter {
+public final class EncodingFilter implements Filter {
 
     private String encoding = "utf-8";
 

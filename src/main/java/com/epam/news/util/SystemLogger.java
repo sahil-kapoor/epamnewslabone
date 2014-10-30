@@ -10,7 +10,9 @@ import org.apache.log4j.Logger;
  */
 public final class SystemLogger {
 	
-	private SystemLogger(){};
+	private SystemLogger(){
+		
+	}
 	
 	private static final Logger Log = Logger.getLogger(SystemLogger.class);
 	

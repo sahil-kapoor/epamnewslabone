@@ -5,9 +5,7 @@
 <link rel="stylesheet" type="text/css" href="assets/css/newsView.css">
 <script type="text/javascript" src="assets/js/view.js"></script>
 
-<script type="text/javascript">
-	var deleteSingle = '<bean:message key="js.news.delete.single" />'
-</script>
+<script type="text/javascript" src="assets/js/messages/viewMessages.jsp"></script>
 
 <c:set var="last" scope="session" value="view" />
 <c:set var="lastId" scope="session" value="${NewsForm.newsMessage.id}" />

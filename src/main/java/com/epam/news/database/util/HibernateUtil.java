@@ -15,7 +15,11 @@ import com.epam.news.util.SystemLogger;
  * Throws  ExceptionInInitializerError when session factory cannot be builded.
  *
  */
-public class HibernateUtil {
+public final class HibernateUtil {
+	
+	private HibernateUtil(){
+		
+	}
 	
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 	 

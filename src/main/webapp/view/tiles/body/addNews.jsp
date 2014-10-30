@@ -6,16 +6,8 @@
 
 <link rel="stylesheet" type="text/css" href="assets/css/addNews.css">
 <script type="text/javascript" src="assets/js/addNews.js"></script>
-<script type="text/javascript">
-	var invalidDate = '<bean:message key="js.news.bad.date" />';
-	var invalidContent = '<bean:message key="js.news.bad.content" />';
-	var invalidBrief = '<bean:message key="js.news.bad.brief" />';
-	var invalidTitle = '<bean:message key="js.news.bad.title" />';
-	var imposibleDate = '<bean:message key="js.news.imposible.date" />';
-	var cancel = '<bean:message key="js.news.cancel" />';
-	var lang = '<bean:message key="js.news.lang" />';
-</script>
 
+<script type="text/javascript" src="assets/js/messages/addMessages.jsp"></script>
 
 <c:if test="${NewsForm.newsMessage.id == 0 }">
 	<c:set var="current" scope="session" value="add" />

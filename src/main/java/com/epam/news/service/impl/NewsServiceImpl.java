@@ -14,7 +14,7 @@ import com.epam.news.service.NewsService;
  * @author Alexander_Demeshko
  *
  */
-public class NewsServiceImpl implements NewsService {
+public final class NewsServiceImpl implements NewsService {
 
 	private NewsDaoI dao;
 

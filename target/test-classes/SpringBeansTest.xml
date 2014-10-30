@@ -34,15 +34,17 @@
 		<constructor-arg type="java.lang.Integer" value="${jdbc.size}" />
 	</bean>
 
-	<bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="${jdbc.driver}" />
-        <property name="jdbcUrl" value="${jdbc.url}" />
-        <property name="user" value="${jdbc.user}" />
-        <property name="password" value="${jdbc.password}" /> 
-        <property name="minPoolSize" value="1" />
-        <property name="maxPoolSize" value="10" />
- 	</bean>
 
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="minPoolSize" value="1" />
+		<property name="maxPoolSize" value="10" />
+	</bean>
+	
 	<bean id="emf"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="packagesToScan" value="com.epam.news.model" />
@@ -57,22 +59,25 @@
 			</props>
 		</property>
 	</bean>
-
-
+	
+	
+	
+	
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" />
 	</bean>
-
+	
 	<tx:annotation-driven proxy-target-class="true"
 		transaction-manager="transactionManager" />
-
+	
 	<bean id="NewsDaoJpa" class="com.epam.news.database.dao.NewsDaoJpa">
 	</bean>
-
+	
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	
 
 
 </beans>

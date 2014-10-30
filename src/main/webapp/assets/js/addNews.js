@@ -104,8 +104,15 @@ function checkDate(date) {
 	        composedDate.getFullYear() == y){
     	return "";
     } else {
-    	
-    	return "\n" + imposibleDate
+    	var mess = "\n" + imposibleDate;
+    	mess+="\n" + invalidDate;
+    	if (d>31){
+    		mess+="\n----"+imposibleDay;
+    	}
+    	if (m>11){
+    		mess+="\n----"+imposibleMonth;
+    	}
+    	return mess;
 	}
 }
 
